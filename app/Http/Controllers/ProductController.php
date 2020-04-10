@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -17,16 +19,37 @@ class ProductController extends Controller
     {
         
     }
+    public function storerank(Request $request){
+       $product = Product::find($request->id);
+    //    dd($product);
+       $authuser = Auth::id();
+       $product->users()->attach($request->rate,['user_id'=> $authuser , 'product_id' => $request->id,'rank' =>$request->rate]);
+    
+       $avg = DB::table('rates')->where('product_id', $request->id)->avg('rank');
+       $addtotable= DB::table('products')
+       ->where('id', $request->id)
+       ->update(['average' => $avg-1]);
+       dd($avg-1);
+    }
 
+    public function towards($category){
+       if ($category == "0") {
+          return $this->best();
+       }else{
+           $category= Category::find($category);
+           return $this->bests($category);
+       }
+    }
     public function best(){
-       $top = Product::orderBy('rate','desc')->take(4)->get();
+       $top = Product::orderBy('average','desc')->take(4)->get();
        dd($top);
 
     }
 
-    public function bests(Category $category){
+    public function bests($category){
         
-        $best = $category;
+        $cat= $category->products->sortByDesc('average')->take(2)->all();
+          dd($cat);
     }
 
     /**
@@ -56,9 +79,11 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($product)
     {
-        //
+        $prod = Product::find($product);
+        // dd($prod);
+       return view('products.show',['prod'=>$prod]);
     }
 
     /**
@@ -69,7 +94,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        
     }
 
     /**

@@ -31,9 +31,9 @@ class Product extends Model
     }
 
     public function users(){
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany('App\User', 'rates', 'product_id', 'user_id');
     }
-
+    
 
 
 

@@ -39,11 +39,11 @@ class User extends Authenticatable
 
     public function products(){
 
-        return  $this->belongsToMany(Product::class);
+        return  $this->belongsToMany('App\Product', 'rates', 'user_id', 'product_id');
 
     }
 
-    public function oreders(){
+    public function orders(){
         return $this->hasMany(Order::class);
     }
 

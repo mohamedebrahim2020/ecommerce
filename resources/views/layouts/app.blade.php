@@ -15,11 +15,13 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
 </head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 
 <body>
     <div id="app">
@@ -47,7 +49,7 @@
                               
                             </div>
                           </li>  --}}
-                          <select name="country" id="country" class="form-control input-lg dynamic" data-dependent="state">
+                          <select name="category" id="category" class="form-control input-lg dynamic" data-dependent="state">
                             <option value="">Select category</option>
                             @foreach($categories   as $category)
                             <option value="{{ $category->id}}">{{ $category->name }}</option>

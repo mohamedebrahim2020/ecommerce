@@ -32,6 +32,17 @@
           </div>
         </div>
       </div>
+      <nav >
+     <div >
+       <ul class="" style="list-style-type:none;margin:0;paddingo;overflow:hidden;background-color:#333333;">
+       <li class="" style="float: left;" value="0"><a style="display:block;color:white;text-align:center;padding: 16px;text-decoration: none;" onmouseover="this.style.textDecoration='underline';"  onmouseout="this.style.textDecoration='none';" >All</a></li>
+           <li class="" style="float: left;"  value="1"><a style="display:block;color:white;text-align:center;padding: 16px;text-decoration: none;" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';">protein</a></li>
+           <li class="" style="float: left;"  value="2"><a style="display:block;color:white;text-align:center;padding: 16px;text-decoration: none;" onmouseover="this.style.textDecoration='underline';"  onmouseout="this.style.textDecoration='none';">vitamins</a></li>
+           <li class="" style="float: left;"  value="3"><a style="display:block;color:white;text-align:center;padding: 16px;text-decoration: none;" onmouseover="this.style.textDecoration='underline';"  onmouseout="this.style.textDecoration='none';">supplement</a></li>
+           <li class="" style="float: left;"  value="4"><a style="display:block;color:white;text-align:center;padding: 16px;text-decoration: none;" onmouseover="this.style.textDecoration='underline';"  onmouseout="this.style.textDecoration='none';">nutrition</a></li>
+       </ul>            
+     </div>
+    </nav>     
 </div>
 
 
@@ -49,7 +60,7 @@ function paginates(data) {
             document.getElementById("pageBtb1").style.color = "white"
         }
 
-        function inserts(data){
+        function insert(data){
         let d1 = document.getElementById('card');
             d1.innerHTML = " ";
           console.log(data);
@@ -57,7 +68,8 @@ function paginates(data) {
             data.forEach(element => {
                 d1.insertAdjacentHTML('beforeend', `
 	
-			<h3>${element.name}</h3> <br>`)
+			<h3>${element.name}</h3> <br>
+            <h3><a href="/products/${element.id}"> show this product </a></h3>`)
             });
             
             
@@ -93,7 +105,7 @@ function paginates(data) {
                         //     if(data.last_page>1){
                         //         //  paginate(data)
                         //     }
-                          inserts(data);
+                          insert(data);
                         // } else {
                         //     d1.innerHTML = "No Results Found";
                         //     d1.className = "row font-weight-bold text-danger";

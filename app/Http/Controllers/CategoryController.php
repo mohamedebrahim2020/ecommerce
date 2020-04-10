@@ -15,10 +15,11 @@ class CategoryController extends Controller
 
      public function home(Category $category){
         
-    //    $cat= $category->products->sortByDesc('rate')->take(2)->all();
+       $cat= $category->products->sortByDesc('average')->take(2)->all();
     //     dd($cat);
+    //->sortByDesc('rate')->take(2)->all()
 // $category->product()->with('rate')->get();
-    // return response()->json($cat);
+     return response()->json($cat);
 
      }
     public function index()
