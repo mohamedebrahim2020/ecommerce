@@ -35,7 +35,7 @@
 </div>
 
 
-<script type="application/javascript">
+<script type="text/javascript">
 
 function paginate(data) {
             document.getElementById("pages").innerHTML = "";

@@ -31,11 +31,15 @@ Route::get('/newtag', function () {
 });
 
 //test
-Route::get('/dd','ProductController@best');
-Route::get('/dd/{category}','ProductController@towards');
+// Route::get('/dd','ProductController@best');
+// Route::get('/dd/{category}','ProductController@towards');
 //products
 Route::get('/products/{product}','ProductController@show');
 Route::get('/rankproduct','ProductController@storerank');
+Route::get('/fetch/best/{category}','ProductController@towards');
+ //cart
+Route::get('/fetch/cart/{prodID}','CartController@store');
+
 
 
 

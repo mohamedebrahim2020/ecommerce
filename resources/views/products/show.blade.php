@@ -29,7 +29,7 @@
 
 </div>    
 </body>
-<script type="application/javascript">
+<script type="text/javascript">
 
 $(document).ready(function (){
 

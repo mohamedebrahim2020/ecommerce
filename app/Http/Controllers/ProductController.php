@@ -7,6 +7,7 @@ use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
 {
@@ -17,23 +18,24 @@ class ProductController extends Controller
      */
     public function index()
     {
-        
+        $tops = Product::orderBy('average','desc')->take(4)->get();
+    //    dd($top);
+       return view('home',['tops'=> $tops]);
     }
     public function storerank(Request $request){
-       $product = Product::find($request->id);
-    //    dd($product);
-       $authuser = Auth::id();
-       $product->users()->attach($request->rate,['user_id'=> $authuser , 'product_id' => $request->id,'rank' =>$request->rate]);
+        $product = Product::find($request->id);
+        //    dd($product);
+           $authuser = Auth::id();
+            $product->users()->detach($authuser);
+           $product->users()->attach($authuser,['rank' =>$request->rate]);
+            $avg = DB::table('rates')->where('product_id','=',$request->id)->avg('rank');
+            $product->average = $avg;
+            $product->save();
     
-       $avg = DB::table('rates')->where('product_id', $request->id)->avg('rank');
-       $addtotable= DB::table('products')
-       ->where('id', $request->id)
-       ->update(['average' => $avg-1]);
-       dd($avg-1);
-    }
+     }
 
     public function towards($category){
-       if ($category == "0") {
+       if ($category == "5") {
           return $this->best();
        }else{
            $category= Category::find($category);
@@ -42,14 +44,19 @@ class ProductController extends Controller
     }
     public function best(){
        $top = Product::orderBy('average','desc')->take(4)->get();
-       dd($top);
+    //    dd($top);
+       return response()->json($top);
 
     }
 
     public function bests($category){
         
-        $cat= $category->products->sortByDesc('average')->take(2)->all();
-          dd($cat);
+        $cat= $category->products->sortByDesc('average')->take(2);
+        //    dd($category->products->sortByDesc('average')->take(2));
+             
+            //  dd(gettype($cat));
+        return response()->json($cat);
+
     }
 
     /**

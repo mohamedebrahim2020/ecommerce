@@ -15,7 +15,7 @@ class CategoryController extends Controller
 
      public function home(Category $category){
         
-       $cat= $category->products->sortByDesc('average')->take(2)->all();
+       $cat= $category->products;
     //     dd($cat);
     //->sortByDesc('rate')->take(2)->all()
 // $category->product()->with('rate')->get();

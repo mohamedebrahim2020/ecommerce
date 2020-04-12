@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Category;
+use App\Product;
 
 class HomeController extends Controller
 {
@@ -26,6 +26,8 @@ class HomeController extends Controller
     public function index()
     {
        
-        return view('home');
+        $tops = Product::orderBy('average','desc')->take(4)->get();
+        //    dd($top);
+           return  view('home',['tops'=> $tops]);
     }
 }
