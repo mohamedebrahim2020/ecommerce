@@ -33,6 +33,7 @@ Route::get('/newtag', function () {
 //test
 // Route::get('/dd','ProductController@best');
 // Route::get('/dd/{category}','ProductController@towards');
+Route::get('/test','CartController@test');
 //products
 Route::get('/products/{product}','ProductController@show');
 Route::get('/rankproduct','ProductController@storerank');
