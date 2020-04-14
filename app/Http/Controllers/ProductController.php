@@ -35,29 +35,33 @@ class ProductController extends Controller
      }
 
     public function towards($category){
-       if ($category == "5") {
-          return $this->best();
+       if ($category == "0") {
+        $top = Product::orderBy('average','desc')->take(4)->get();
+        //    dd($top);
+           return response()->json($top);
        }else{
-           $category= Category::find($category);
-           return $this->bests($category);
-       }
-    }
-    public function best(){
-       $top = Product::orderBy('average','desc')->take(4)->get();
-    //    dd($top);
-       return response()->json($top);
-
-    }
-
-    public function bests($category){
-        
+           $category=Category::find($category);
         $cat= $category->products->sortByDesc('average')->take(2);
         //    dd($category->products->sortByDesc('average')->take(2));
              
             //  dd(gettype($cat));
         return response()->json($cat);
-
+       }
     }
+    // public function best(){
+    //    $top = Product::orderBy('average','desc')->take(4)->get();
+    
+    //    return response()->json($top);
+
+    // }
+
+    // public function bests($category){
+        
+    //     $cat= $category->products->sortByDesc('average')->take(3)->all();
+        
+    //     return response()->json($cat);
+
+    // }
 
     /**
      * Show the form for creating a new resource.
