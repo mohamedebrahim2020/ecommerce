@@ -16,6 +16,7 @@
 
                     You are logged in!
                 </div>
+                
             </div>
         </div>
     </div>
@@ -36,7 +37,7 @@
      <div >
          <h2>best product</h2>
        <ul class="dd" style="list-style-type:none;margin:0;paddingo;overflow:hidden;background-color:#333333;">
-       <li class="dd" style="float: left;" value="0"><a style="display:block;color:white;text-align:center;padding: 16px;text-decoration: none;" onmouseover="this.style.textDecoration='underline';"  onmouseout="this.style.textDecoration='none';" >All</a></li>
+       <li class="dd" style="float: left;" value="5"><a style="display:block;color:white;text-align:center;padding: 16px;text-decoration: none;" onmouseover="this.style.textDecoration='underline';"  onmouseout="this.style.textDecoration='none';" >All</a></li>
        @foreach($categories   as $category)
        <li class="dd" style="float: left;" value="{{$category->id}}"><a style="display:block;color:white;text-align:center;padding: 16px;text-decoration: none;" onmouseover="this.style.textDecoration='underline';"  onmouseout="this.style.textDecoration='none';" >{{$category->name}}</a></li>
        @endforeach
@@ -193,9 +194,13 @@ function paginates(data) {
        console.log(x);
        var prodID = $(this).attr("id");
       console.log(prodID);
+
+      var counts = document.getElementById("lblCartCount");
+       console.log(counts);
+       
        
        if (x.innerHTML === "add to cart") {
-    x.innerHTML = "remove from cart";
+    x.innerHTML = "remove";
   } else {
     x.innerHTML = "add to cart";
   }
@@ -207,7 +212,8 @@ function paginates(data) {
         dataType: 'json',
         success:function(data)
         {
-        
+          counts.innerHTML= data;
+         
         }
     
        })

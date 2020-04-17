@@ -18,6 +18,7 @@
     
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     
 </head>
@@ -34,7 +35,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse header" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         {{-- <li class="nav-item dropdown">
@@ -49,12 +50,21 @@
                               
                             </div>
                           </li>  --}}
+                          <li>
                           <select name="category" id="category" class="form-control input-lg dynamic" data-dependent="state">
                             <option value="">Select category</option>
                             @foreach($categories   as $category)
                             <option value="{{ $category->id}}">{{ $category->name }}</option>
                             @endforeach
                            </select>
+                          </li>
+                          
+                            <li >
+                                 <i class="fa fa-shopping-cart"></i>
+                                 <a href="/cart" class="icon-shopping-cart" style="font-size: 25px">
+                                 <asp:Label ID="lblCartCount" runat="server" CssClass="badge badge-warning"  ForeColor="White"/><?php echo (Cart::instance('main')->count());?></a>
+                            </li>
+                           
                     </ul>
 
                     <!-- Right Side Of Navbar -->

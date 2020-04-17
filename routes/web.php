@@ -33,6 +33,7 @@ Route::get('/newtag', function () {
 //test
 // Route::get('/dd','ProductController@best');
 // Route::get('/dd/{category}','ProductController@towards');
+// Route::get('/c', function () {return view('carts.checkout');});
 Route::get('/test','CartController@test');
 //products
 Route::get('/products/{product}','ProductController@show');
@@ -40,6 +41,12 @@ Route::get('/rankproduct','ProductController@storerank');
 Route::get('/fetch/best/{category}','ProductController@towards');
  //cart
 Route::get('/fetch/cart/{prodID}','CartController@store');
+Route::get('/cart','CartController@index');
+Route::get('/quantity','CartController@quantity');
+Route::get('/remove','CartController@remove');
+//checkout
+Route::get('/checkout','CheckoutController@index');
+
 
 
 

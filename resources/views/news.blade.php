@@ -140,10 +140,7 @@ $(document).ready(function () {
             }
 
             $('#country').on('keyup',function() {
-                    // the text typed in the input field is assigned to a variable 
-                    // if (!$(this.val())) {
-                    //     fetch_Data_all();
-                    // }
+                   
                     if($(this).val()!=""){
                     var query = $(this).val();
                     // call to an ajax function

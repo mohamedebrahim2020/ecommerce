@@ -35,7 +35,7 @@ class ProductController extends Controller
      }
 
     public function towards($category){
-       if ($category == "0") {
+       if ($category == "5") {
         $top = Product::orderBy('average','desc')->take(4)->get();
         //    dd($top);
            return response()->json($top);
