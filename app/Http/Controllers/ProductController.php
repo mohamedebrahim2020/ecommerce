@@ -31,7 +31,7 @@ class ProductController extends Controller
             $avg = DB::table('rates')->where('product_id','=',$request->id)->avg('rank');
             $product->average = $avg;
             $product->save();
-    
+
      }
 
     public function towards($category){
@@ -43,22 +43,22 @@ class ProductController extends Controller
            $category=Category::find($category);
         $cat= $category->products->sortByDesc('average')->take(2);
         //    dd($category->products->sortByDesc('average')->take(2));
-             
+
             //  dd(gettype($cat));
         return response()->json($cat);
        }
     }
     // public function best(){
     //    $top = Product::orderBy('average','desc')->take(4)->get();
-    
+
     //    return response()->json($top);
 
     // }
 
     // public function bests($category){
-        
+
     //     $cat= $category->products->sortByDesc('average')->take(3)->all();
-        
+
     //     return response()->json($cat);
 
     // }
@@ -105,7 +105,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        
+
     }
 
     /**
@@ -129,5 +129,8 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+    public function checkCard(Product $product){
+        return $product->checkInCart();
     }
 }

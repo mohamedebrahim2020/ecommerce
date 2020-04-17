@@ -36,6 +36,7 @@ Route::get('/newtag', function () {
 // Route::get('/c', function () {return view('carts.checkout');});
 Route::get('/test','CartController@test');
 //products
+Route::get('/exist/{product}','ProductController@checkCard');
 Route::get('/products/{product}','ProductController@show');
 Route::get('/rankproduct','ProductController@storerank');
 Route::get('/fetch/best/{category}','ProductController@towards');
