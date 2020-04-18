@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
- 
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
- 
+
     {{-- <title>@yield('title')</title> --}}
- 
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
- 
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
- 
+
 </head>
 <body>
     <div class="container page">
@@ -35,22 +35,22 @@
                             <div class="col-sm-3 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div>
                             <div class="col-sm-9">
                                 <h4 class="nomargin">{{$cart->name}}</h4>
-                                
+
                             </div>
                         </div>
                     </td>
                     <td data-th="Price">{{$cart->price}}</td>
                     <td data-th="Quantity">
-                    <input type="number" id="{{$cart->rowId}}" class="form-control quantity" value="{{$cart->qty}}">
+                    <input type="number" id="{{$cart->rowId}}" class="form-control quantity" value="{{$cart->qty}}" min="1">
                     </td>
                 <td data-th="Subtotal" id="{{$cart->id}}" class="text-center">{{$cart->price * $cart->qty}}</td>
                     <td class="actions" data-th="">
-                        
+
                         <button class="btn btn-danger btn-sm remove"><i class="fa fa-trash-o"></i></button>
                     </td>
                 </tr>
                 @endforeach
-            
+
             </tbody>
             <tfoot>
             {{-- <tr class="visible-xs">
@@ -69,30 +69,30 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            
+
             $('.quantity').on('change',function() {
                 if($(this).val()!=""){
                     // console.log($(this).closest('tr').find('td:nth-child(4)').attr("id"));
-               
-                 
+
+
              var itemPriceId = $(this).closest('tr').find('td:nth-child(4)').attr("id");
-           
+
             //   element.innerHTML= data.item.qty;
                 var qty = $(this).val();
                 var rowNo = $(this).attr("id");
             //   console.log($(this).attr("id"));
             //   console.log(qty);
-              
-              
+
+
                 $.ajax({
                     url:"/quantity",
                     type:"GET",
                     dataType: 'json',
                     data:{'qty':qty , 'rowNo' :rowNo ,'itemPriceId':itemPriceId},
                     success:function (data) {
-                             
-                       
-                            
+
+
+
                             var element = document.getElementById(itemPriceId);
                             var totaal = document.getElementById("totaaal");
                             let modifiedQty = data.item.qty;
@@ -102,57 +102,57 @@
                             element.innerHTML = thisItem;
                             totaal.innerHTML = "<strong>" + totalPrice +"</strong>";
 
-                           
-                             
-                        
+
+
+
                     }
                 })
                 }else{
-                   
+
 
                 }
-               
+
             });
 
 
 
             $('.remove').on('click',function() {
-                
-                    
+
+
                console.log($(this));
-               
-                 
+
+
              var row = $(this).closest('tr').find("td:nth-child(3) input[type='number']").attr('id');
               console.log(row);
-              
+
            var block =$(this).closest('tr').remove();
-              
-              
+
+
                 $.ajax({
                     url:"/remove",
                     type:"GET",
                     dataType: 'json',
                      data:{'row':row},
                     success:function (data) {
-                             
+
                             //  console.log(data);
-                             
+
                         // let totalPrice =data.total;
                          var totaals = document.getElementById("totaaal");
                          totaals.innerHTML = "<strong>" + data +"</strong>";
 
-                           
-                             
-                        
+
+
+
                     }
                 })
-               
-               
+
+
             });
 
 
-        }); 
+        });
 
-    </script>    
+    </script>
 </body>
-</html>    
+</html>

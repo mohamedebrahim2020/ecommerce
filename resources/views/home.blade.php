@@ -16,16 +16,16 @@
 
                     You are logged in!
                 </div>
-                
+
             </div>
         </div>
     </div>
     <div class="card mb-3" style="max-width: 540px;">
         <div class="row no-gutters">
-         
+
           <div class="col-md-8">
             <div class="card-body" id="card">
-   
+
             </div>
             <div class="row justify-content-center" id="pages">
 
@@ -41,16 +41,16 @@
        @foreach($categories   as $category)
        <li class="dd" style="float: left;" value="{{$category->id}}"><a style="display:block;color:white;text-align:center;padding: 16px;text-decoration: none;" onmouseover="this.style.textDecoration='underline';"  onmouseout="this.style.textDecoration='none';" >{{$category->name}}</a></li>
        @endforeach
-       </ul>           
+       </ul>
      </div>
     </nav>
     <div class="md-12"  id="bests">
         @foreach($tops   as $top)
         <h3 >{{ $top->name }}</h3>
         <h3 >{{ $top->average }}</h3>
-    <h3 ><button ><div class="mydiv" id="{{ $top->id}}">add to cart</div></button></h3>
+    <h3 ><button ><div class="mydiv" id="{{ $top->id}}">{{$top->checkInCart()}}</div></button></h3>
         @endforeach
-    </div>      
+    </div>
 </div>
 
 
@@ -72,33 +72,48 @@ function paginates(data) {
         let d1 = document.getElementById('card');
             d1.innerHTML = " ";
           console.log(data);
-          
+
             data.forEach(element => {
                 d1.insertAdjacentHTML('beforeend', `
-	
+
 			<h3>${element.name}</h3> <br>
             <h3><a href="/products/${element.id}"> show this product </a></h3>`)
             });
-            
-            
+
+
       }
-      function attach(data){
+
+function checkInCart(product_id) {
+    let exitInCart='';
+    $.ajax({
+        async: false,
+        url: "/exist/"+product_id,
+        data: "",
+        success: function(data) {
+            exitInCart = data;
+        }
+    });
+    return exitInCart;
+}
+
+function attach(data){
         let d1 = document.getElementById('bests');
             d1.innerHTML = " ";
           console.log(data);
-          
+
             data.forEach(element => {
+                 let existInCart= checkInCart(element.id)
                 d1.insertAdjacentHTML('beforeend', `
 	         <div class="md-3">
 			<h3>${element.name}</h3> <br>
             <h3>${element.average}</h3> <br>
-            <h3 ><button ><div class="mydiv" id="${element.id}">add to cart</div></button></h3>
+            <h3 ><button ><div class="mydiv" id="${element.id}">${existInCart}</div></button></h3>
               </div>`)
             });
 
-            
-            
-            
+
+
+
       }
 
 
@@ -112,25 +127,25 @@ function paginates(data) {
       {
        var select = $(this).attr("id");
        console.log(select);
-       
+
        var value = $(this).val();
        console.log(value);
-       
-       
+
+
        $.ajax({
         url:"/fetch/products/"+value,
         method:'GET',
         dataType: 'json',
         success:function(data)
         {
-            
-            
+
+
             let d1 = document.getElementById("card")
                         let SPAN = document.getElementById("pages")
                         d1.innerHTML = " ";
                         SPAN.innerHTML = " ";
 
-                       
+
                         // if (data.data.length != 0) {
                         //     if(data.last_page>1){
                         //         //  paginate(data)
@@ -141,7 +156,7 @@ function paginates(data) {
                         //     d1.className = "row font-weight-bold text-danger";
                         // }
         }
-    
+
        })
       }
      });
@@ -151,25 +166,25 @@ function paginates(data) {
       {
     //    var select = $(this).attr("id");
     //    console.log(select);
-       
+
        var best = $(this).val();
        console.log(best);
-       
-       
+
+
        $.ajax({
         url:"/fetch/best/"+best,
         method:'GET',
         dataType: 'json',
         success:function(data)
         {
-            
-            
+
+
             let d1 = document.getElementById("bests")
                         // let SPAN = document.getElementById("pages")
                         d1.innerHTML = " ";
                         // SPAN.innerHTML = " ";
 
-                       
+
                         // if (data.data.length != 0) {
                         //     if(data.last_page>1){
                         //         //  paginate(data)
@@ -181,48 +196,48 @@ function paginates(data) {
                         //     d1.className = "row font-weight-bold text-danger";
                         // }
         }
-    
+
        })
       }
      });
       function toggle(){
      $('.mydiv').click(function(){
-     
-    
-       
+
+
+
        var x = $(this)[0];
        console.log(x);
        var prodID = $(this).attr("id");
       console.log(prodID);
 
       var counts = document.getElementById("lblCartCount");
-       console.log(counts);
-       
-       
+
+
        if (x.innerHTML === "add to cart") {
     x.innerHTML = "remove";
   } else {
     x.innerHTML = "add to cart";
   }
-       
-       
+
+
        $.ajax({
         url:"/fetch/cart/"+prodID,
         method:'GET',
         dataType: 'json',
         success:function(data)
         {
+
           counts.innerHTML= data;
-         
+
         }
-    
+
        })
-      
+
      });
     }
-    
-    
+
+
     });
     </script>
-    
+
     @endsection
