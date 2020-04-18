@@ -46,6 +46,10 @@ Route::get('/quantity','CartController@quantity');
 Route::get('/remove','CartController@remove');
 //checkout
 Route::get('/checkout','CheckoutController@index');
+//contact
+Route::get('/contact', function () {
+    return view('contacts.contact');
+});
 
 
 

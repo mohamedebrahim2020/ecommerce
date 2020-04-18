@@ -50,7 +50,7 @@
                               
                             </div>
                           </li>  --}}
-                          <li>
+                          <li class="nav-item dropdown">
                           <select name="category" id="category" class="form-control input-lg dynamic" data-dependent="state">
                             <option value="">Select category</option>
                             @foreach($categories   as $category)
@@ -58,7 +58,18 @@
                             @endforeach
                            </select>
                           </li>
-                          
+                          <li class="nav-item" >
+                            <a class="nav-link" href="#">offers </a>
+                          </li>
+                          <li class="nav-item" >
+                            <a class="nav-link" href="#">about us </a>
+                          </li>
+                          <li class="nav-item" >
+                            <a class="nav-link" href="/newtag">news </a>
+                          </li>
+                          <li class="nav-item" >
+                            <a class="nav-link" href="/contact">contact us  </a>
+                          </li>
                             <li >
                                  <i class="fa fa-shopping-cart"></i>
                                  <a href="/cart" class="icon-shopping-cart" style="font-size: 25px">
