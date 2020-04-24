@@ -76,7 +76,9 @@
 
 
              var itemPriceId = $(this).closest('tr').find('td:nth-child(4)').attr("id");
-
+             
+                
+                 
             //   element.innerHTML= data.item.qty;
                 var qty = $(this).val();
                 var rowNo = $(this).attr("id");
@@ -90,8 +92,14 @@
                     dataType: 'json',
                     data:{'qty':qty , 'rowNo' :rowNo ,'itemPriceId':itemPriceId},
                     success:function (data) {
-
-
+                                 console.log(data);
+                                 
+                            if (data.messages == "more") {
+                                var element = document.getElementById(rowNo);
+                                element.value=data.storeQuantity;
+                                
+                                alert("no sufficient quantity in store");
+                            }else{
 
                             var element = document.getElementById(itemPriceId);
                             var totaal = document.getElementById("totaaal");
@@ -102,7 +110,7 @@
                             element.innerHTML = thisItem;
                             totaal.innerHTML = "<strong>" + totalPrice +"</strong>";
 
-
+                        }
 
 
                     }

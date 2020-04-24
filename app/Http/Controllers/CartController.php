@@ -50,10 +50,18 @@ class CartController extends Controller
      }
 
      public function quantity(Request $request){
-         $cartItem=Cart::instance('main')->update($request->rowNo,$request->qty);
-         $carttotal=Cart::instance('main')->priceTotal();
+         $storeQuantity=Product::where('id','=', $request->itemPriceId)->value('quantity');
+        //  dd($storeQuantity);
+        if ($request->qty <= $storeQuantity) {
+          $cartItem=Cart::instance('main')->update($request->rowNo,$request->qty);
+          $carttotal=Cart::instance('main')->priceTotal();
          //dd($carttotal);
-          return response()->json(["item"=>$cartItem,"total"=>$carttotal]);
+           return response()->json(["item"=>$cartItem,"total"=>$carttotal]);
+        }else{
+            $messages="more";
+                return response()->json(["storeQuantity"=>$storeQuantity,"messages"=>$messages]);
+        }
+        
      }
 
      public function remove (Request $request){

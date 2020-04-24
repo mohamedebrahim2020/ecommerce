@@ -5,22 +5,18 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
+                
+              @if(session('message'))
+              <div class="alert alert-success">
+                  {{ session('message') }}
+              </div>
+          @endif
+                     
 
             </div>
         </div>
     </div>
-    <div class="card mb-3" style="max-width: 540px;">
+    {{-- <div class="card mb-3" style="max-width: 540px;">
         <div class="row no-gutters">
 
           <div class="col-md-8">
@@ -32,7 +28,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> --}}
       <nav >
      <div >
          <h2>best product</h2>
@@ -49,6 +45,17 @@
         <h3 >{{ $top->name }}</h3>
         <h3 >{{ $top->average }}</h3>
     <h3 ><button ><div class="mydiv" id="{{ $top->id}}">{{$top->checkInCart()}}</div></button></h3>
+        @endforeach
+    </div>
+    <hr>
+    <div class="md-12"  id="sellers">
+   <h2> best seller </h2>
+        @foreach($arrs   as $arr)
+        <h3 >{{ $arr->name }}</h3>
+    <i class="fa fa-heart seller" id="a{{$arr->id}}" style="font-size:48px;color:{{$arr->checkHeart()}};"></i>
+    {{-- {{$arr->checkHeart()}} --}}
+        {{-- <h3 >{{ $top->average }}</h3>
+    <h3 ><button ><div class="mydiv" id="{{ $top->id}}">{{$top->checkInCart()}}</div></button></h3> --}}
         @endforeach
     </div>
 </div>
@@ -68,25 +75,12 @@ function paginates(data) {
             document.getElementById("pageBtb1").style.color = "white"
         }
 
-        function insert(data){
-        let d1 = document.getElementById('card');
-            d1.innerHTML = " ";
-          console.log(data);
-
-            data.forEach(element => {
-                d1.insertAdjacentHTML('beforeend', `
-
-			<h3>${element.name}</h3> <br>
-            <h3><a href="/products/${element.id}"> show this product </a></h3>`)
-            });
-
-
-      }
+     
 
 function checkInCart(product_id) {
     let exitInCart='';
     $.ajax({
-        async: false,
+        async: false,//
         url: "/exist/"+product_id,
         data: "",
         success: function(data) {
@@ -95,6 +89,20 @@ function checkInCart(product_id) {
     });
     return exitInCart;
 }
+
+// function checkHeart(product_id) {
+//     let heartColor='';
+//     $.ajax({
+//         async: false,//
+//         url: "/heart/"+product_id,
+//         data: "",
+//         success: function(data) {
+//           heartColor = data;
+//         }
+//     });
+//     return heartColor;
+// }
+
 
 function attach(data){
         let d1 = document.getElementById('bests');
@@ -119,47 +127,39 @@ function attach(data){
 
 
     $(document).ready(function(){
+      
 
-        toggle();
+      $('.seller').click(function(){
 
-     $('.dynamic').change(function(){
-      if($(this).val() != '')
-      {
-       var select = $(this).attr("id");
-       console.log(select);
-
-       var value = $(this).val();
-       console.log(value);
-
+       var seller =$(this).attr("id");
+       var subSeller = seller.substring(1);
+       console.log(subSeller);
 
        $.ajax({
-        url:"/fetch/products/"+value,
+        url:"/fetch/seller/"+subSeller,
         method:'GET',
         dataType: 'json',
-        success:function(data)
-        {
+        success:function(data){
 
-
-            let d1 = document.getElementById("card")
-                        let SPAN = document.getElementById("pages")
-                        d1.innerHTML = " ";
-                        SPAN.innerHTML = " ";
-
-
-                        // if (data.data.length != 0) {
-                        //     if(data.last_page>1){
-                        //         //  paginate(data)
-                        //     }
-                          insert(data);
-                        // } else {
-                        //     d1.innerHTML = "No Results Found";
-                        //     d1.className = "row font-weight-bold text-danger";
-                        // }
+          console.log(data);
+          var char ="a";
+          var identity = char.concat(data.id);
+          var pro = document.getElementById(identity).style.color = data.color;
+           console.log(pro);
+          
+          
+           
+          // console.log(hearts);
+          
         }
-
        })
-      }
-     });
+       
+
+
+      });
+       
+
+    
 
      $('.dd').click(function(){
       if($(this).val() != '')
@@ -173,34 +173,25 @@ function attach(data){
 
        $.ajax({
         url:"/fetch/best/"+best,
+        async:false,
         method:'GET',
         dataType: 'json',
         success:function(data)
         {
 
-
+             
+              
             let d1 = document.getElementById("bests")
-                        // let SPAN = document.getElementById("pages")
                         d1.innerHTML = " ";
-                        // SPAN.innerHTML = " ";
-
-
-                        // if (data.data.length != 0) {
-                        //     if(data.last_page>1){
-                        //         //  paginate(data)
-                        //     }
+                   
                           attach(data);
-                          toggle();
-                        // } else {
-                        //     d1.innerHTML = "No Results Found";
-                        //     d1.className = "row font-weight-bold text-danger";
-                        // }
+                        
         }
 
        })
       }
      });
-      function toggle(){
+      
      $('.mydiv').click(function(){
 
 
@@ -234,7 +225,7 @@ function attach(data){
        })
 
      });
-    }
+    
 
 
     });

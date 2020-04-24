@@ -165,11 +165,12 @@ $(document).ready(function () {
                 });
 
                 // initiate a click function on each search result
-                $(document).on('click', 'li', function(){
+                $(document).on('click', '.tags', function(){
                     // declare the value in the input field to a variable
 
                     var value = $(this).text();
-
+                         console.log(value);
+                         
                     // assign the value to the search box
                     $('#country').val(value);
                     var word = document.getElementById('country').value;

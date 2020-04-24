@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -27,7 +28,14 @@ class HomeController extends Controller
     {
        
         $tops = Product::orderBy('average','desc')->take(4)->get();
-        //    dd($top);
-           return  view('home',['tops'=> $tops]);
+        $prods= DB::table('order_product')->select('product_id',DB::raw('SUM(quantity) as total_qty'))
+       ->groupBy('product_id')->orderBy('quantity','DESC')->get()->take(4);
+        $arrs=[];
+        foreach($prods as $prod){
+        array_push($arrs,
+            $product=Product::find($prod->product_id)
+        );
+    }
+           return  view('home',['tops'=> $tops,'arrs'=> $arrs]);
     }
 }

@@ -31,7 +31,7 @@ Route::get('/newtag', function () {
 });
 
 //test
-// Route::get('/dd','ProductController@best');
+// Route::get('/dd','ProductController@bestSeller');
 // Route::get('/dd/{category}','ProductController@towards');
 // Route::get('/c', function () {return view('carts.checkout');});
 Route::get('/test','CartController@test');
@@ -40,6 +40,8 @@ Route::get('/exist/{product}','ProductController@checkCard');
 Route::get('/products/{product}','ProductController@show');
 Route::get('/rankproduct','ProductController@storerank');
 Route::get('/fetch/best/{category}','ProductController@towards');
+Route::get('/fetch/seller/{seller}','ProductController@favourites');
+// Route::get('/heart/{product}','ProductController@heartCheck');
  //cart
 Route::get('/fetch/cart/{prodID}','CartController@store');
 Route::get('/cart','CartController@index');
@@ -47,10 +49,14 @@ Route::get('/quantity','CartController@quantity');
 Route::get('/remove','CartController@remove');
 //checkout
 Route::get('/checkout','CheckoutController@index');
+Route::get('/discount/{voucher}','CheckoutController@discount');
+Route::post('/order/store','CheckoutController@store');
+
 //contact
 Route::get('/contact', function () {
     return view('contacts.contact');
 });
+Route::post('/contact/store','ContactController@store');
 
 
 

@@ -115,8 +115,82 @@
         </nav>
 
         <main class="py-4">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row no-gutters">
+        
+                  <div class="col-md-8">
+                    <div class="card-body" id="prods">
+        
+                    </div>
+                    <div class="row justify-content-center" id="numbs">
+        
+                    </div>
+                  </div>
+                </div>
+              </div>
             @yield('content')
         </main>
     </div>
+    <script type="text/javascript">
+       
+
+       function add(data){
+        let d1 = document.getElementById('prods');
+            d1.innerHTML = " ";
+          console.log(data);
+
+            data.forEach(element => {
+                d1.insertAdjacentHTML('beforeend', `
+
+			<h3>${element.name}</h3> <br>
+            <h3><a href="/products/${element.id}"> show this product </a></h3>`)
+            });
+
+
+      }
+
+
+     $(document).ready(function(){
+     $('.dynamic').change(function(){
+      if($(this).val() != '')
+      {
+       var select = $(this).attr("id");
+       console.log(select);
+
+       var value = $(this).val();
+       console.log(value);
+
+
+       $.ajax({
+        url:"/fetch/products/"+value,
+        method:'GET',
+        dataType: 'json',
+        success:function(data)
+        {
+
+
+            let d1 = document.getElementById("prods")
+                        let SPAN = document.getElementById("numbs")
+                        d1.innerHTML = " ";
+                        SPAN.innerHTML = " ";
+
+
+                        // if (data.data.length != 0) {
+                        //     if(data.last_page>1){
+                        //         //  paginate(data)
+                        //     }
+                          add(data);
+                        // } else {
+                        //     d1.innerHTML = "No Results Found";
+                        //     d1.className = "row font-weight-bold text-danger";
+                        // }
+        }
+
+       })
+      }
+     });
+
+     });
+    </script>
 </body>
 </html>

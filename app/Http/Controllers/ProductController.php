@@ -16,12 +16,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $tops = Product::orderBy('average','desc')->take(4)->get();
-    //    dd($top);
-       return view('home',['tops'=> $tops]);
-    }
+    
     public function storerank(Request $request){
         $product = Product::find($request->id);
         //    dd($product);
@@ -41,27 +36,14 @@ class ProductController extends Controller
            return response()->json($top);
        }else{
            $category=Category::find($category);
-        $cat= $category->products->sortByDesc('average')->take(2);
-        //    dd($category->products->sortByDesc('average')->take(2));
-
-            //  dd(gettype($cat));
+        $cat= $category->products->sortByDesc('average')->take(4);
+        dd($cat);
+        
         return response()->json($cat);
        }
     }
-    // public function best(){
-    //    $top = Product::orderBy('average','desc')->take(4)->get();
+     
 
-    //    return response()->json($top);
-
-    // }
-
-    // public function bests($category){
-
-    //     $cat= $category->products->sortByDesc('average')->take(3)->all();
-
-    //     return response()->json($cat);
-
-    // }
 
     /**
      * Show the form for creating a new resource.
@@ -133,4 +115,27 @@ class ProductController extends Controller
     public function checkCard(Product $product){
         return $product->checkInCart();
     }
+    
+    public function favourites (Product $seller){
+        // dd($seller);
+        $authuser = Auth::id();
+        $find= DB::table('favourites')->where([['product_id', '=', $seller->id],['user_id','=',$authuser]])->get();
+        // dd($find);
+        if ($find->isNotEmpty()) {
+            $seller->favourites()->detach($authuser);
+            $seller->save();
+            return response()->json(["color"=>"grey","id"=>$seller->id]);
+        }
+        else{
+            $seller->favourites()->attach($authuser,['created_at' => now()]);
+            $seller->save();
+            return response()->json(["color"=>"red","id"=>$seller->id]);
+        } 
+        
+     
+    }
+
+    // public function heartCheck(Product $product){
+    //     return $product->checkInCart();
+    // }
 }

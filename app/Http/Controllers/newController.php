@@ -63,14 +63,14 @@ class newController extends Controller
                 // loop through the result array
                 foreach ($data as $row){
                     // concatenate output to the array
-                    $output .= '<li class="list-group-item">'.$row->tags.'</li>';
+                    $output .= '<li class="list-group-item tags">'.$row->tags.'</li>';
                 }
                 // end of output
                 $output .= '</ul>';
             }
             else {
                 // if there's no matching results according to the input
-                $output .= '<li class="list-group-item">'.'No results'.'</li>';
+                $output .= '<li class="list-group-item tags">'.'No results'.'</li>';
             }
             // return output result array
             return $output;

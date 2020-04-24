@@ -4,6 +4,8 @@ namespace App;
 
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
@@ -34,6 +36,9 @@ class Product extends Model
     public function users(){
         return $this->belongsToMany('App\User', 'rates', 'product_id', 'user_id');
     }
+    public function favourites(){
+        return $this->belongsToMany('App\User', 'favourites', 'product_id', 'user_id');
+    }
     public function checkInCart(){
         $checkExist = Cart::instance('main')->search(function ($cartItem, $rowId)  {
             return $cartItem->id === $this->id;
@@ -44,6 +49,23 @@ class Product extends Model
         else{
             return 'add to cart';
         }
+    }
+
+    public function checkHeart(){
+        
+        $authuser = Auth::id();
+        $find= DB::table('favourites')->where([['product_id', '=', $this->id],['user_id','=',$authuser]])->get();
+        // dd($find);
+        if ($find->isNotEmpty()) {
+            // $this->favourites()->detach($authuser);
+            // $this->save();
+            return 'red';
+        }
+        else{
+            // $seller->favourites()->attach($authuser,['created_at' => now()]);
+            // $seller->save();
+            return 'grey';
+        } 
     }
 
 
