@@ -44,6 +44,8 @@
         @foreach($tops   as $top)
         <h3 >{{ $top->name }}</h3>
         <h3 >{{ $top->average }}</h3>
+        <h3 style="text-decoration: line-through;"> {{$top->price}}</h3>
+        <h3 > {{$top->finalPrice()}}</h3>
     <h3 ><button ><div class="mydiv" id="{{ $top->id}}">{{$top->checkInCart()}}</div></button></h3>
         @endforeach
     </div>
@@ -52,10 +54,11 @@
    <h2> best seller </h2>
         @foreach($arrs   as $arr)
         <h3 >{{ $arr->name }}</h3>
+        <h3 >{{ $arr->average }}</h3>
+        <h3 style="text-decoration: line-through;"> {{$arr->price}}</h3>
+        <h3 > {{$arr->finalPrice()}}</h3>
     <i class="fa fa-heart seller" id="a{{$arr->id}}" style="font-size:48px;color:{{$arr->checkHeart()}};"></i>
-    {{-- {{$arr->checkHeart()}} --}}
-        {{-- <h3 >{{ $top->average }}</h3>
-    <h3 ><button ><div class="mydiv" id="{{ $top->id}}">{{$top->checkInCart()}}</div></button></h3> --}}
+   <h3 ><button ><div class="mydiv" id="b{{ $arr->id}}">{{$arr->checkInCart()}}</div></button></h3>
         @endforeach
     </div>
 </div>
@@ -90,18 +93,20 @@ function checkInCart(product_id) {
     return exitInCart;
 }
 
-// function checkHeart(product_id) {
-//     let heartColor='';
-//     $.ajax({
-//         async: false,//
-//         url: "/heart/"+product_id,
-//         data: "",
-//         success: function(data) {
-//           heartColor = data;
-//         }
-//     });
-//     return heartColor;
-// }
+function checkOffer(product_id) {
+    let offerPrice='';
+    $.ajax({
+        async: false,//
+        url: "/offer/"+product_id,
+        data: "",
+        success: function(data) {
+          offerPrice = data;
+        }
+    });
+    return offerPrice;
+}
+
+
 
 
 function attach(data){
@@ -111,10 +116,13 @@ function attach(data){
 
             data.forEach(element => {
                  let existInCart= checkInCart(element.id)
+                 let offerPrice = checkOffer(element.id)
                 d1.insertAdjacentHTML('beforeend', `
 	         <div class="md-3">
 			<h3>${element.name}</h3> <br>
             <h3>${element.average}</h3> <br>
+            <h3 style="text-decoration: line-through;"> ${element.price}</h3>
+            <h3 >${offerPrice}</h3>
             <h3 ><button ><div class="mydiv" id="${element.id}">${existInCart}</div></button></h3>
               </div>`)
             });
@@ -173,12 +181,13 @@ function attach(data){
 
        $.ajax({
         url:"/fetch/best/"+best,
-        async:false,
+        
         method:'GET',
         dataType: 'json',
         success:function(data)
         {
 
+             
              
               
             let d1 = document.getElementById("bests")
@@ -195,11 +204,17 @@ function attach(data){
      $('.mydiv').click(function(){
 
 
-
+      
        var x = $(this)[0];
        console.log(x);
        var prodID = $(this).attr("id");
       console.log(prodID);
+      
+      if (prodID.indexOf("b")==0) {
+        var prodID = prodID.substring(1);
+        console.log(prodID);
+        
+      }
 
       var counts = document.getElementById("lblCartCount");
 
@@ -210,15 +225,23 @@ function attach(data){
     x.innerHTML = "add to cart";
   }
 
-
+    
        $.ajax({
         url:"/fetch/cart/"+prodID,
         method:'GET',
         dataType: 'json',
         success:function(data)
         {
-
-          counts.innerHTML= data;
+          
+          counts.innerHTML= data.count;
+          var charB ="b";
+          var concats = charB.concat(prodID);
+          var x = document.getElementById(prodID);
+          var y = document.getElementById(concats);
+          x.innerHTML = data.status;
+          y.innerHTML = data.status;
+          
+          
 
         }
 

@@ -36,8 +36,8 @@ class ProductController extends Controller
            return response()->json($top);
        }else{
            $category=Category::find($category);
-        $cat= $category->products->sortByDesc('average')->take(4);
-        dd($cat);
+        $cat= $category->products->sortByDesc('average')->take(4)->all();
+        // dd($cat);
         
         return response()->json($cat);
        }
@@ -135,7 +135,12 @@ class ProductController extends Controller
      
     }
 
-    // public function heartCheck(Product $product){
-    //     return $product->checkInCart();
-    // }
+    public function price_offer(Product $product){
+        $x =   $product->offer->offer_percentage;
+        $y =   $product->price;
+        $z = $y - ($y * $x);
+           return $z;
+       }
+
+        
 }

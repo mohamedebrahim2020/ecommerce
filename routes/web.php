@@ -31,12 +31,13 @@ Route::get('/newtag', function () {
 });
 
 //test
-// Route::get('/dd','ProductController@bestSeller');
+//  Route::get('/dd/{product}','ProductController@test');
 // Route::get('/dd/{category}','ProductController@towards');
 // Route::get('/c', function () {return view('carts.checkout');});
 Route::get('/test','CartController@test');
 //products
 Route::get('/exist/{product}','ProductController@checkCard');
+Route::get('/offer/{product}','ProductController@price_offer');
 Route::get('/products/{product}','ProductController@show');
 Route::get('/rankproduct','ProductController@storerank');
 Route::get('/fetch/best/{category}','ProductController@towards');

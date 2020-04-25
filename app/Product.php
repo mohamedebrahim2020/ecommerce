@@ -55,18 +55,27 @@ class Product extends Model
         
         $authuser = Auth::id();
         $find= DB::table('favourites')->where([['product_id', '=', $this->id],['user_id','=',$authuser]])->get();
-        // dd($find);
+        
         if ($find->isNotEmpty()) {
-            // $this->favourites()->detach($authuser);
-            // $this->save();
+        
             return 'red';
         }
         else{
-            // $seller->favourites()->attach($authuser,['created_at' => now()]);
-            // $seller->save();
             return 'grey';
         } 
     }
+
+    public function offer(){
+
+        return  $this->belongsTo(Offer::class);
+    }
+
+    public function finalPrice(){
+        $x =   $this->offer->offer_percentage;
+        $y =   $this->price;
+        $z = $y - ($y * $x);
+           return $z;
+       }
 
 
 

@@ -11,6 +11,9 @@ class CartController extends Controller
      public function store($prodID) {
          // Cart::instance('main')->destroy();
         $product = Product::find($prodID);
+        $x =   $product->offer->offer_percentage;
+        $y =   $product->price;
+        $z = $y - ($y * $x);
         $checkExist = Cart::instance('main')->search(function ($cartItem, $rowId) use ($product) {
             return $cartItem->id === $product->id;
         });
@@ -23,16 +26,17 @@ class CartController extends Controller
             }
             $remove = Cart::instance('main')->remove($row);
             $count=Cart::instance('main')->count();
-             return response()->json($count);
+             return response()->json(["count"=>$count,"status"=>"add to cart"]);
             
         
            
         }
+       
         $tax=Cart::setGlobalTax(0); 
-        $item=Cart::instance('main')->add($product->id, $product->name, 1, $product->price)->associate('\App\Product');
+        $item=Cart::instance('main')->add($product->id, $product->name, 1, $z)->associate('\App\Product');
         $count=Cart::instance('main')->count();
         // Cart::instance('main')->destroy();
-        return response()->json($count);
+        return response()->json(["count"=>$count,"status"=>"remove"]);
          
         
          
