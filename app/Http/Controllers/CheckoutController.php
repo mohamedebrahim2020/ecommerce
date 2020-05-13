@@ -72,6 +72,7 @@ class CheckoutController extends Controller
                 'product_id' => $cart->id,
                 'quantity' => $cart->qty,
                 'order_id' => $order->id,
+                'created_at' => now(),
               ]);
               $oldQty = DB::table('products')->where('id','=', $cart->id)->value('quantity');
               

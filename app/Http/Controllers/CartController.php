@@ -9,11 +9,10 @@ use Illuminate\Http\Request;
 class CartController extends Controller
 {
      public function store($prodID) {
-         // Cart::instance('main')->destroy();
+         
         $product = Product::find($prodID);
-        $x =   $product->offer->offer_percentage;
-        $y =   $product->price;
-        $z = $y - ($y * $x);
+       $z= $product->finalPrice();
+       
         $checkExist = Cart::instance('main')->search(function ($cartItem, $rowId) use ($product) {
             return $cartItem->id === $product->id;
         });

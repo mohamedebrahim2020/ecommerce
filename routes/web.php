@@ -21,8 +21,9 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/fetch/products/{category}','CategoryController@home');
+
 //newspage
-// Route::get('/newtag')
+
 Route::get('/news','newController@index');
 Route::get('/newsearch','newController@search');
 Route::get('/searched/{word}','newController@searchable');
@@ -31,18 +32,27 @@ Route::get('/newtag', function () {
 });
 
 //test
-//  Route::get('/dd/{product}','ProductController@test');
+ Route::get('/dd','HomeController@inner');
 // Route::get('/dd/{category}','ProductController@towards');
 // Route::get('/c', function () {return view('carts.checkout');});
 Route::get('/test','CartController@test');
 //products
 Route::get('/exist/{product}','ProductController@checkCard');
 Route::get('/offer/{product}','ProductController@price_offer');
+Route::get('/per/offer/{product}','ProductController@precent_offer');
+Route::get('/check/heart/{product}','ProductController@check_heart');
+Route::get('/text/heart/{product}','ProductController@text_heart');
 Route::get('/products/{product}','ProductController@show');
 Route::get('/rankproduct','ProductController@storerank');
 Route::get('/fetch/best/{category}','ProductController@towards');
 Route::get('/fetch/seller/{seller}','ProductController@favourites');
-// Route::get('/heart/{product}','ProductController@heartCheck');
+//offer
+// Route::get('/offer', function () {
+//     return view('offers');
+// });
+Route::get('/offer','ProductController@indexOffer');
+Route::get('/heart/{seller}','ProductController@favourites');
+
  //cart
 Route::get('/fetch/cart/{prodID}','CartController@store');
 Route::get('/cart','CartController@index');
@@ -59,6 +69,25 @@ Route::get('/contact', function () {
 });
 Route::post('/contact/store','ContactController@store');
 
+//profile
+Route::get('/profile', function () {
+    return view('profile');
+});
+Route::get('/myaccount', function () {
+    return view('myaccount');
+});
+
+
+//user
+Route::put('/update/user/{id}','USerController@update');
+Route::get('/myorders/{id}','OrderController@myOrders');
+Route::get('/myorders', function () {
+    return view('myorders');
+});
+Route::get('/myfavourites/{user}','FavouriteController@myfavourites');
+Route::get('/myfavourites', function () {
+    return view('myfavourites');
+});
 
 
 

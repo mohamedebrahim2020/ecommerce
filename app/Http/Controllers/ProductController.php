@@ -124,23 +124,36 @@ class ProductController extends Controller
         if ($find->isNotEmpty()) {
             $seller->favourites()->detach($authuser);
             $seller->save();
-            return response()->json(["color"=>"grey","id"=>$seller->id]);
+            return response()->json(["color"=>"grey","id"=>$seller->id,"text"=>"Add to favourites"]);
         }
         else{
             $seller->favourites()->attach($authuser,['created_at' => now()]);
             $seller->save();
-            return response()->json(["color"=>"red","id"=>$seller->id]);
+            return response()->json(["color"=>"red","id"=>$seller->id,"text"=>"Remove from favourites"]);
         } 
         
      
     }
 
     public function price_offer(Product $product){
-        $x =   $product->offer->offer_percentage;
-        $y =   $product->price;
-        $z = $y - ($y * $x);
-           return $z;
+      return $product->finalPrice();
        }
 
+    public function precent_offer(Product $product){
+        return $product->off_percent();
+        } 
+    public function check_heart(Product $product){
+            return $product->checkHeart();
+            }
+    public function text_heart(Product $product){
+                return $product->checkWordHeart();
+                }               
+
+     public function indexOffer(){
+       
+      $products = Product::where('offer_id','>',1)->paginate(4);
+      
+      return view('offers',['products'=>$products]);
         
+     }   
 }

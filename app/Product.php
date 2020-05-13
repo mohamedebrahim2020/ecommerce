@@ -65,6 +65,20 @@ class Product extends Model
         } 
     }
 
+    public function checkWordHeart(){
+        
+        $authuser = Auth::id();
+        $find= DB::table('favourites')->where([['product_id', '=', $this->id],['user_id','=',$authuser]])->get();
+        
+        if ($find->isNotEmpty()) {
+        
+            return 'remove from favourites';
+        }
+        else{
+            return 'add to favourites';
+        } 
+    }
+
     public function offer(){
 
         return  $this->belongsTo(Offer::class);
@@ -77,6 +91,11 @@ class Product extends Model
            return $z;
        }
 
+       public function off_percent(){
+        $x =   $this->offer->offer_percentage;
+        $y= $x*100 ;
+           return  $y;
+       }
 
 
 

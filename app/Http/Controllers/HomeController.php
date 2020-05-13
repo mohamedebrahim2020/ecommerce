@@ -36,6 +36,16 @@ class HomeController extends Controller
             $product=Product::find($prod->product_id)
         );
     }
+           
            return  view('home',['tops'=> $tops,'arrs'=> $arrs]);
+    }
+
+    public function inner(){
+        $users = DB::table('order_product')
+        ->join('products', 'products.id', '=', 'order_product.product_id')
+        ->select('products.*', 'order_product.product_id', DB::raw('SUM(order_product.quantity) as total_qty'))
+        ->groupBy('order_product.product_id')->orderBy('order_product.quantity','DESC')->get()->take(4);
+        dd($users);
+
     }
 }
