@@ -25,7 +25,9 @@ class CartController extends Controller
             }
             $remove = Cart::instance('main')->remove($row);
             $count=Cart::instance('main')->count();
-             return response()->json(["count"=>$count,"status"=>"add to cart"]);
+            $lists=Cart::instance('main')->content();
+            $prices=Cart::instance('main')->priceTotal();
+             return response()->json(["count"=>$count,"status"=>"add to cart","lists"=> $lists, "prices"=>$prices]);
             
         
            
@@ -34,8 +36,10 @@ class CartController extends Controller
         $tax=Cart::setGlobalTax(0); 
         $item=Cart::instance('main')->add($product->id, $product->name, 1, $z)->associate('\App\Product');
         $count=Cart::instance('main')->count();
+        $lists=Cart::instance('main')->content();
+        $prices=Cart::instance('main')->priceTotal();
         // Cart::instance('main')->destroy();
-        return response()->json(["count"=>$count,"status"=>"remove"]);
+        return response()->json(["count"=>$count,"status"=>"remove","lists"=> $lists, "prices"=>$prices]);
          
         
          

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
@@ -31,5 +32,11 @@ class AppServiceProvider extends ServiceProvider
             $categories = DB::table('categories')->get();
             View::share('categories', $categories);
         }
+       
+        view()->composer('*', function ($view) 
+    {   
+        $lists = Cart::instance('main')->content();
+        $view->with('lists', $lists );    
+    });
     }
 }

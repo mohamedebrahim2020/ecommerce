@@ -220,137 +220,7 @@
 			<!-- /container -->
 		</div>
     <!-- /SECTION -->
-    <!-- NEWSLETTER -->
-		<div id="newsletter" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12">
-						<div class="newsletter">
-							<p>Sign Up for the <strong>NEWSLETTER</strong></p>
-							<form>
-								<input class="input" type="email" placeholder="Enter Your Email">
-								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-							</form>
-							<ul class="newsletter-follow">
-								<li>
-									<a href="#"><i class="fa fa-facebook"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-twitter"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-instagram"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-pinterest"></i></a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /NEWSLETTER -->
-
-    <!-- FOOTER -->
-		<footer id="footer">
-			<!-- top footer -->
-			<div class="section">
-				<!-- container -->
-				<div class="container">
-					<!-- row -->
-					<div class="row">
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">About Us</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
-								<ul class="footer-links">
-									<li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
-									<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
-									<li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">Categories</h3>
-								<ul class="footer-links">
-									<li><a href="#">Hot deals</a></li>
-									<li><a href="#">Laptops</a></li>
-									<li><a href="#">Smartphones</a></li>
-									<li><a href="#">Cameras</a></li>
-									<li><a href="#">Accessories</a></li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="clearfix visible-xs"></div>
-
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">Information</h3>
-								<ul class="footer-links">
-									<li><a href="#">About Us</a></li>
-									<li><a href="#">Contact Us</a></li>
-									<li><a href="#">Privacy Policy</a></li>
-									<li><a href="#">Orders and Returns</a></li>
-									<li><a href="#">Terms & Conditions</a></li>
-								</ul>
-							</div>
-						</div>
-
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">Service</h3>
-								<ul class="footer-links">
-									<li><a href="#">My Account</a></li>
-									<li><a href="#">View Cart</a></li>
-									<li><a href="#">Wishlist</a></li>
-									<li><a href="#">Track My Order</a></li>
-									<li><a href="#">Help</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<!-- /row -->
-				</div>
-				<!-- /container -->
-			</div>
-			<!-- /top footer -->
-
-			<!-- bottom footer -->
-			<div id="bottom-footer" class="section">
-				<div class="container">
-					<!-- row -->
-					<div class="row">
-						<div class="col-md-12 text-center">
-							<ul class="footer-payments">
-								<li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
-								<li><a href="#"><i class="fa fa-credit-card"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
-								<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
-							</ul>
-							<span class="copyright">
-								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							</span>
-						</div>
-					</div>
-						<!-- /row -->
-				</div>
-				<!-- /container -->
-			</div>
-			<!-- /bottom footer -->
-		</footer>
-		<!-- /FOOTER -->
+    
 
 
 
@@ -507,11 +377,42 @@ function attach(data){
 
             });
 
+//      function attachCart(data);
+
+      }
+      function attachCart(data){
+        let d1 = document.getElementById('cart-dropdown');
+            d1.innerHTML = " ";
+            d2 =  document.getElementById('cart-summary');
+            d2.innerHTML = " ";
+          
+
+            for (const [key, value] of Object.entries(data.lists)) {
+                            console.log(value.name);
+                         console.log(value.price);
+                         d1.insertAdjacentHTML('beforeend', `
+											<div class="product-widget">
+												<div class="product-img">
+													<img src="./img/product01.png" alt="">
+												</div>
+												<div class="product-body">
+													<h3 class="product-name"><a href="#">${value.name}</a></h3>
+													<h4 class="product-price"><span class="qty">1x</span>${value.price}</h4>
+												</div>
+												<button class="delete"><i class="fa fa-close"></i></button>
+                      </div>
+                      `)
+                                        }
+
+            d2.insertAdjacentHTML('beforeend', `
+            <small>${data.count} Item(s) selected</small>
+											<h5>SUBTOTAL: $${data.prices}</h5>
+                      `)
+
 
 
 
       }
-
 
 
     $(document).ready(function(){
@@ -532,25 +433,18 @@ function attach(data){
           console.log(data);
           var char ="a";
           var charTop ="e";
-          // var charJs = "g";
           var charText = "c";
           var charTextTop = "d";
-          // var charTextJs = "h";
           var identity = char.concat(data.id);
           var identityTop = charTop.concat(data.id);
-          // var identityJs = charJs.concat(data.id);
           var textIdentity = charText.concat(data.id);
           var textIdentityTop = charTextTop.concat(data.id);
-          // var textIdentityJs = charTextJs.concat(data.id);
           var pro = document.getElementById(identity).style.color = data.color; 
           var proTop = document.getElementById(identityTop).style.color = data.color; 
-          // var proJs = document.getElementById(identityJs).style.color = data.color; 
           var text = document.getElementById(textIdentity);
           var textTop = document.getElementById(textIdentityTop);
-          // var textJs = document.getElementById(textIdentityJs);
           text.innerHTML=data.text;
           textTop.innerHTML=data.text;
-          // testJs.innerHTML=data.text;
            console.log(pro);
           
           
@@ -606,11 +500,11 @@ function attach(data){
        var x = $(this)[0];
        console.log(x);
        var prodID = $(this).attr("id");
-      console.log(prodID);
+      // console.log(prodID);
       
       if (prodID.indexOf("b")==0) {
         var prodID = prodID.substring(1);
-        console.log(prodID);
+        // console.log(prodID);
         
       }
 
@@ -639,7 +533,13 @@ function attach(data){
           x.innerHTML = data.status;
           y.innerHTML = data.status;
           
-          
+          let d1 = document.getElementById("cart-dropdown")
+                        d1.innerHTML = " ";
+                           //console.log(data.lists);
+                        //    console.log(value.name);
+                        //  console.log(value.price);
+                         
+                          attachCart(data);
 
         }
 
