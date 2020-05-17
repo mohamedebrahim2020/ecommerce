@@ -13,7 +13,7 @@
 					<div class="col-md-12">
 						<h3 class="breadcrumb-header">Checkout</h3>
 						<ul class="breadcrumb-tree">
-							<li><a href="#">Home</a></li>
+							<li><a href="/home/">Home</a></li>
 							<li class="active">Checkout</li>
 						</ul>
 					</div>
@@ -41,30 +41,60 @@
                                @csrf
                             <div class="form-group">
 								<input class="input" type="email" name="email_address" placeholder="Email">
-							</div>   
+							  
+                            @error('email_address')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                        
+                            </div>   
 							<div class="form-group">
 								<input class="input" type="text" name="first_name" placeholder="First Name">
-							</div>
+							 
+                            @error('first_name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                       
+                            </div>
 							<div class="form-group">
 								<input class="input" type="text" name="last_name" placeholder="Last Name">
-							</div>
+							 
+                            @error('last_name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                        
+                            </div>
 							<div class="form-group">
 								<input class="input" type="text" name="address" placeholder="Address">
-							</div>
+							@error('address')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                            </div>
 							<div class="form-group">
 								<input class="input" type="text" name="city" placeholder="City">
+                                 @error('city')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
 							</div>
 							<div class="form-group">
 								<input class="input" type="text" name="country" placeholder="Country">
+                                 @error('country')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
 							</div>
                             <div class="form-group">
-								 <input class="input"  type="text" name="Appartement"  placeholder="Appartement">
+								 <input class="input"  type="text" name="Appartement"  placeholder="Appartement (optional)">
 							</div>
 							<div class="form-group">
 								<input class="input" type="text" name="zip_code" placeholder="ZIP Code">
+                                @error('zip_code')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
 							</div>
 							<div class="form-group">
 								<input class="input" type="text" name="shipping_method" placeholder="shipping method">
+                                  @error('shipping_method')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
 							</div>
 							<div class="form-group">
 								<div class="input-checkbox">
@@ -116,7 +146,7 @@
 										<input class="input" type="text" name="zip-code" placeholder="ZIP Code">
 									</div>
 									<div class="form-group">
-										<input class="input" type="text" name="shipping_method" placeholder="shipping method">
+										<input class="input" type="text" name="" placeholder="shipping method">
 									</div>
 								</div>
 							</div>
@@ -154,11 +184,11 @@
 							</div>
 							<div class="order-col">
 								<div><strong>TOTAL</strong></div>
-								<div><strong class="order-total">$<span id="dis"><?php echo (Cart::instance('main')->priceTotal()); ?></span></strong></div>
+								<div><strong class="order-total">$<?php echo (Cart::instance('main')->priceTotal()); ?></strong></div>
 							</div>
                             <div class="order-col">
 								<div><strong>After Discount</strong></div>
-								<div><strong class="order-total">$<?php echo (Cart::instance('main')->priceTotal()); ?></strong></div>
+								<div><strong class="order-total">$<span id="dis"><?php echo (Cart::instance('main')->priceTotal()); ?></span></strong></div>
 							</div>
 						</div>
 						<div class="payment-method">
@@ -211,8 +241,8 @@
                                 </div>
                                 </div>
                             </div>
-                         
-						<button type="submit" class="primary-btn order-submit">Place order</button>
+                         <button type="submit" class="">Place order</button>
+						{{-- <button type="submit" class="primary-btn order-submit">Place order</button> --}}
 					</div>
                     </form>
 					<!-- /Order Details -->

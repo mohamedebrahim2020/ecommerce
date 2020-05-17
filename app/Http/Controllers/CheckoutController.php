@@ -31,6 +31,7 @@ class CheckoutController extends Controller
 
     public function store(Request $request)
     {
+      
         $this->validate($request, [
             'email_address' => 'required',
             'first_name' => 'required',
@@ -43,8 +44,9 @@ class CheckoutController extends Controller
             'shipping_method' => 'required',
 
         ]);
+        dd($request);
         DB::transaction(function () use ($request) {
-            
+         
             $order = new Order();
             $order->contact_email = $request->input('email_address');
             $order->first_name = $request->input('first_name');
@@ -77,7 +79,7 @@ class CheckoutController extends Controller
               $oldQty = DB::table('products')->where('id','=', $cart->id)->value('quantity');
               
               $newQty = $oldQty-($cart->qty);
-            //   dd($newQty);
+              dd($newQty);
               DB::table('products')->where('id','=', $cart->id)->update(['quantity' => $newQty]);
             }
 

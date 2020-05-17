@@ -15,14 +15,14 @@
      <!-- jQuery Plugins -->
 		
     <!-- Bootstrap -->
-    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
     <!-- Slick -->
-		<link type="text/css" rel="stylesheet" href="css/slick.css"/>
-    <link type="text/css" rel="stylesheet" href="css/slick-theme.css"/>
+		<link type="text/css" rel="stylesheet" href="{{ asset('css/slick.css') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/slick-theme.css') }}"/>
     <!-- nouislider -->
-		<link type="text/css" rel="stylesheet" href="css/nouislider.min.css"/>
+		<link type="text/css" rel="stylesheet" href="{{ asset('css/nouislider.min.css') }}"/>
   	<!-- Font Awesome Icon -->
-		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}" >
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     {{-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> --}}
@@ -103,7 +103,7 @@
 						<div class="col-md-3">
 							<div class="header-logo">
 								<a href="#" class="logo">
-									<img src="./img/logo.png" alt="">
+									<img src="{{ asset('./img/logo.png') }}"  alt="">
 								</a>
 							</div>
 						</div>
@@ -383,12 +383,12 @@
 			<!-- /bottom footer -->
 		</footer>
 		<!-- /FOOTER -->
-    <script src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/slick.min.js"></script>
-		<script src="js/nouislider.min.js"></script>
-		<script src="js/jquery.zoom.min.js"></script>
-		<script type="text/javascript" src="js/main.js"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"> </script>
+		<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+		<script src="{{ asset('js/slick.min.js') }}"></script>
+		<script src="{{ asset('js/nouislider.min.js') }}"></script>
+		<script src="{{ asset('js/jquery.zoom.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/main.js') }}"> </script>
     <script type="text/javascript">
        
 
