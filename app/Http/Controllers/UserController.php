@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -92,5 +93,24 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // for admin
+
+    public function adminUsers()
+    {
+        $users = User::paginate(3);
+        return view('layouts.AdminPanel.user.userstable', ['users' => $users]);
+    }
+    public function ban(Request $request, $id)
+    {
+        $user = User::find($id);
+        if (!empty($user)) {
+
+            $user->bans()->create([
+                'expired_at' => '+1 month'
+            ]);
+        }
+        return redirect('/admin/panel/userstable')->with('success', 'Ban Successfully..');
     }
 }

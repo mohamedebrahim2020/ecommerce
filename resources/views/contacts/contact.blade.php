@@ -47,7 +47,7 @@
                             <div class="validation"></div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-12">
                         <input type="text" class="form-control" name="subject" id="subject"
                                placeholder="subject" data-rule="minlen:4"
                                data-msg="Please enter at least 8 chars of subject"/>
@@ -57,7 +57,7 @@
                         @enderror
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-md-12">
                         <textarea class="form-control" name="message" rows="5" data-rule="required"
                                   data-msg="Please write something for us"
                                   placeholder="message"></textarea>
@@ -68,7 +68,7 @@
                         </div>
                     </div>
                     <div class="text-center">
-                        <button type="submit">send message</button>
+                        <button type="submit" class="primary-btn order-submit">send message</button>
                     </div>
                 </form>
             </div>

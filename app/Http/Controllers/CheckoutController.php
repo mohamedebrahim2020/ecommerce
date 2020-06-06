@@ -44,7 +44,7 @@ class CheckoutController extends Controller
             'shipping_method' => 'required',
 
         ]);
-        dd($request);
+       
         DB::transaction(function () use ($request) {
          
             $order = new Order();
@@ -77,13 +77,19 @@ class CheckoutController extends Controller
                 'created_at' => now(),
               ]);
               $oldQty = DB::table('products')->where('id','=', $cart->id)->value('quantity');
-              
-              $newQty = $oldQty-($cart->qty);
-              dd($newQty);
+              $newQty = $oldQty-($cart->qty);              
               DB::table('products')->where('id','=', $cart->id)->update(['quantity' => $newQty]);
+              
+
+              $old_count_order = DB::table('users')->where('id','=',auth()->user()->id )->value('orders_count');
+              $new_count_order = $old_count_order + 1 ;
+              DB::table('users')->where('id','=', auth()->user()->id)->update(['orders_count' => $new_count_order]);
+
             }
 
+
             Cart::instance('main')->destroy();
+            $request->session()->forget('discount');
 
         },1);
         return redirect()->to('/home')->with('message', 'Your order has already recorded');

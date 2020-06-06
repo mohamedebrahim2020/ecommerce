@@ -29,7 +29,7 @@ class HomeController extends Controller
        
         $tops = Product::orderBy('average','desc')->take(4)->get();
         $prods= DB::table('order_product')->select('product_id',DB::raw('SUM(quantity) as total_qty'))
-       ->groupBy('product_id')->orderBy('quantity','DESC')->get()->take(4);
+       ->groupBy('product_id')->orderBy('total_qty','DESC')->get()->take(4);
         $arrs=[];
         foreach($prods as $prod){
         array_push($arrs,
@@ -44,7 +44,7 @@ class HomeController extends Controller
         $users = DB::table('order_product')
         ->join('products', 'products.id', '=', 'order_product.product_id')
         ->select('products.*', 'order_product.product_id', DB::raw('SUM(order_product.quantity) as total_qty'))
-        ->groupBy('order_product.product_id')->orderBy('order_product.quantity','DESC')->get()->take(4);
+        ->groupBy('order_product.product_id')->orderBy('total_qty','desc')->get()->take(4);
         dd($users);
 
     }

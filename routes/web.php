@@ -90,5 +90,19 @@ Route::get('/myfavourites', function () {
 });
 
 
+//admin panel
+
+Route::get('/admin', 'ChartsController@index');//->middleware('role:Admin');
+
+//charts for admin panal
+
+Route::get('/chartData', 'ChartsController@chart');//->middleware('role:Admin');
+Route::get('/chartData1', 'ChartsController@chart1');//->middleware('role:Admin');
+Route::get('/chartData2', 'ChartsController@chart2');//->middleware('role:Admin');
+
+//admin users
+
+Route::get('/admin/panel/userstable', 'UserController@adminUsers');//->middleware('role:Admin');
+
 
 

@@ -19,9 +19,7 @@
         </div>
         <div class="col-lg-3"></div>
     </div>
-</div>
-
-<div class="col-lg-9 col-md-12 ">
+    <div class="col-lg-9 col-md-12 ">
     <section id="hotels" class="section-with-bg ">
 
         <div class="container">
@@ -33,6 +31,9 @@
         </div>
     </section>
 </div>
+</div>
+
+
 
 
 <script type="text/javascript">

@@ -113,7 +113,7 @@
 						<!-- /Billing Details -->
 
 						<!-- Shiping Details -->
-						<div class="shiping-details">
+						{{-- <div class="shiping-details">
 							<div class="section-title">
 								<h3 class="title">Shiping address</h3>
 							</div>
@@ -150,7 +150,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> --}}
 						<!-- /Shiping Details -->
 
 						<!-- Order notes -->
@@ -174,7 +174,7 @@
                             @foreach ($carts as $cart)
 								<div class="order-col">
 									<div>{{$cart->qty}}x {{$cart->name}}</div>
-									<div>${{$cart->price}}</div>
+									<div>${{$cart->price * $cart->qty}}</div>
 								</div>
 							@endforeach
 							</div>
@@ -232,17 +232,17 @@
 						</div>
                          <div class="form-group" id="input">
                                 <div class="row">
-                                <div class="col-md-10 data">
+                                <div class="col-md-8 data">
                                 <input type="text" class="form-control" placeholder="gift card or discount code ">
                                 </div>
-                                <div class="input-group-append">
-                                  <a id="code"><li>Apply</li></a>
+                                <div class="input-group-append " style="float:right;">
+                                  <a  class="primary-btn " id="code"><li>Apply</li></a>
                                  
                                 </div>
                                 </div>
                             </div>
-                         <button type="submit" class="">Place order</button>
-						{{-- <button type="submit" class="primary-btn order-submit">Place order</button> --}}
+                         {{-- <button type="submit" class="">Place order</button> --}}
+						<button type="submit" class="primary-btn order-submit">Place order</button>
 					</div>
                     </form>
 					<!-- /Order Details -->
