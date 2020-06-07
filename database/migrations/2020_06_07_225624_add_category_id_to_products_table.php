@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class AddCategoryIdToProductsTable extends Migration
@@ -29,9 +28,7 @@ class AddCategoryIdToProductsTable extends Migration
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-           // Schema::dropIfExists('tableName');
-            DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+            //
         });
     }
 }

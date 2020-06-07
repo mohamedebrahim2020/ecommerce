@@ -165,6 +165,7 @@ class CategoryController extends Controller
             }
            
             $category->products()->delete();
+            dd($category);
             if ($request->has("product")) {
                 foreach ($request->input('product') as $product) {
                     $category->products()->updateOrInsert($product);
