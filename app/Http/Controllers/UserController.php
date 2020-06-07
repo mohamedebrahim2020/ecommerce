@@ -102,15 +102,46 @@ class UserController extends Controller
         $users = User::paginate(3);
         return view('layouts.AdminPanel.user.userstable', ['users' => $users]);
     }
-    public function ban(Request $request, $id)
+    // public function ban(Request $request, $id)
+    // {
+    //     $user = User::find($id);
+    //     if (!empty($user)) {
+
+    //         $user->bans()->create([
+    //             'expired_at' => '+1 month'
+    //         ]);
+    //     }
+    //     return redirect('/admin/panel/userstable')->with('success', 'Ban Successfully..');
+    // }
+     
+
+    public function showuser($id)
     {
         $user = User::find($id);
-        if (!empty($user)) {
+        return view('layouts.AdminPanel.user.show', ['user' => $user]);
+    }
+    public function editUser($id)
+    {
+        $user = User::find($id);
+        return view('layouts.AdminPanel.user.edit', ['user' => $user]);
+    }
 
-            $user->bans()->create([
-                'expired_at' => '+1 month'
-            ]);
-        }
-        return redirect('/admin/panel/userstable')->with('success', 'Ban Successfully..');
+    public function updateUser(Request $request, $id)
+    {
+        $this->validate($request, [
+            'email' => 'email|unique:users,email,' . auth()->user()->id,
+        ]);
+        $user = User::find($id);
+        $user->name = request()->name;
+        $user->email = request()->email;
+        $user->phone = request()->phone;
+        $user->save();
+        return redirect('/admin/panel/userstable');
+    }
+
+    public function destroyUser($id)
+    {
+        User::find($id)->delete();
+        return redirect('/admin/panel/userstable');
     }
 }

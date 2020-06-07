@@ -103,6 +103,21 @@ Route::get('/chartData2', 'ChartsController@chart2');//->middleware('role:Admin'
 //admin users
 
 Route::get('/admin/panel/userstable', 'UserController@adminUsers');//->middleware('role:Admin');
+Route::get('/user/{id}', 'UserController@showUser');//->middleware('role:Admin');
+Route::get('user/edit/{id}', 'UserController@editUser');//->middleware('role:Admin');
+Route::put('user/update/{id}', 'UserController@updateUser')->name('user.update');//->middleware('role:Admin');
+Route::delete('user/{id}', 'UserController@destroyUser');//->middleware('role:Admin');;
+
+
+//admin category
+
+Route::get('/category/admin', 'categoryController@indexCategory')->name('category.indexCategory');//->middleware('role:Admin');
+Route::get('/category/create/admin', 'categoryController@createCategory');//->middleware('role:Admin')->name('category.create22Admin');
+Route::post('/create/category/admin', 'categoryController@addCategoryAdmin');//->middleware('role:Admin');;
+//Route::post('/create/product/admin', 'categoryController@addCategoryProductAdmin');//->middleware('role:Admin');;
+Route::get('/category/editAdmin/{category}', 'categoryController@editCategory');//->middleware('role:Admin')->name('category.edit22Admin');
+//Route::get('/welcome/product', 'categoryController@productindex');//->middleware('role:Admin')->name('category.edit22Admin');
+Route::put('/category/updateAdmin/{category}', 'categoryController@updateCategory');//->middleware('role:Admin')->name('category.update22Admin');
 
 
 

@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
-    protected $fillable = ['name','description','quantity','price','image','rate'];
-
+    protected $fillable = ['name','description','quantity','price','image'];
+//when we use create[] or object we must fill all fillable values
     public function category(){
 
         return  $this->belongsTo(Category::class);

@@ -58,15 +58,16 @@
                             <i class="fas fa-table"></i>Users Management</a>
                     </li>
                     <li>
+                        <a href="/category/admin"> <i class="fas fa-table"></i>
+                            Category Management</a>
+                    </li>
+                    <li>
                         <a href="/items/index"> <i class="fas fa-table"></i>Items Management</a>
                     </li>
                     <li>
                         <a href="/admin/panel/report"> <i class="fas fa-table"></i>Reports Management</a>
                     </li>
-                    <li>
-                        <a href="/category/admin"> <i class="fas fa-table"></i>
-                            Category Management</a>
-                    </li>
+                   
 
                     <li>
                         <a href=" /attribute/admin"> <i class="fas fa-table"></i>

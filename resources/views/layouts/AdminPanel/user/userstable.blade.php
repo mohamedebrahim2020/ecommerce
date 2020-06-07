@@ -39,14 +39,14 @@
                                     @if(auth()->user()->id == $user->id)
                                         <td></td>
                                     @else
-                                        <td>
+                                        {{-- <td>
                                             @if($user->isBanned())
                                                 <a href="/userUserRevoke/{{$user->id}}" class="btn btn-danger m-1">
                                                     Unban</a>
                                             @else
                                                 <a href="/userBan/{{$user->id}}" class="btn btn-danger m-1"> BAN</a>
                                             @endif
-                                        </td>
+                                        </td> --}}
                                     @endif
                                     <td>
                                         <a href="/user/{{$user->id}}" class="btn btn-info m-1">show</a>

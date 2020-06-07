@@ -2,15 +2,15 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Cog\Contracts\Ban\Bannable as BannableContract;
 use Cog\Laravel\Ban\Traits\Bannable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements BannableContract
+class User extends Authenticatable // implements BannableContract
 {
-    use Bannable;
+    //use Bannable;
     use Notifiable;
     
 
@@ -54,5 +54,11 @@ class User extends Authenticatable implements BannableContract
     public function favourites(){
         return $this->belongsToMany('App\Product', 'favourites', 'user_id', 'product_id');
     }
+
+
+
+    // for admins
+
+    
 
 }

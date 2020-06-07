@@ -21,9 +21,9 @@ class CreateProductsTable extends Migration
             $table->integer('price');
             $table->string('image');
             $table->integer('rate');
-            $table->integer('category_id')->unsigned();
+            //
             $table->timestamps();
-            $table->foreign('category_id')->references('id')->on('categories');
+            //
         });
     }
 
