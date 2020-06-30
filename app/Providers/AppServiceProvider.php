@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Providers;
-
+use App\Observers\JobObserver;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -38,9 +40,14 @@ class AppServiceProvider extends ServiceProvider
         }
        
         view()->composer('*', function ($view) 
-    {   
+        {   
         $lists = Cart::instance('main')->content();
         $view->with('lists', $lists );    
-    });
+        });
+
+        if($this->app->environment() == 'production') {
+        URL::forceScheme('https');
+            URL::forceRootUrl(Config::get('app.url'));
+        } 
     }
 }
