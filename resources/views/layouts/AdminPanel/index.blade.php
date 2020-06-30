@@ -45,7 +45,7 @@
                                 </div>
                                 <div class="text">
                                     <h2>{{$reports}}</h2>
-                                    <span>Reports</span>
+                                    <span>products</span>
                                 </div>
                             </div>
                             <div class="overview-chart">
@@ -76,7 +76,7 @@
                                 </div>
                                 <div class="text">
                                     <h2>{{$items}}</h2>
-                                    <span>Items</span>
+                                    <span>categories</span>
                                 </div>
                             </div>
                             <div class="overview-chart">

@@ -41,7 +41,7 @@
                                     <td>
                                         <a href="/category/editAdmin/{{$category->id}}"
                                            class="btn btn-primary">update</a>
-                                        <form class="d-inline" action="/category/deleteAdmin/{{$category->id}}"
+                                        <form class="d-inline" action="/category/delete/{{$category->id}}"
                                               method="POST">
                                             {{ csrf_field() }}
 

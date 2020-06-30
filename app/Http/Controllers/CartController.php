@@ -65,7 +65,7 @@ class CartController extends Controller
          //dd($carttotal);
            return response()->json(["item"=>$cartItem,"total"=>$carttotal]);
         }else{
-            $messages="more";
+                $messages="more";
                 return response()->json(["storeQuantity"=>$storeQuantity,"messages"=>$messages]);
         }
         

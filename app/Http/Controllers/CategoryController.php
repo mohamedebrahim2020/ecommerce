@@ -23,12 +23,8 @@ class CategoryController extends Controller
      return response()->json($cat);
 
      }
-    public function index()
-    {
-        // $categories= Category::all();
-        // dd($categories);
-        // return view('layouts.app')->with('categories', $categories);
-    }
+
+    
 
     /**
      * Show the form for creating a new resource.
@@ -120,24 +116,7 @@ class CategoryController extends Controller
         $category=$category->id;
         return redirect()->route('category.indexCategory')->with('confirm', 'category has already added');    
     }
-    // public function addCategoryProductAdmin(Request $request)
-    // {
-    //     //dd($request);
-    //         $product = Product::create([
-    //             'category_id' => $request->category_id,
-    //             'name' => $request->product,
-    //             'description' => $request->description,
-    //             'quantity' => $request->quantity,
-    //             'price' => $request->price,
-    //             'image' => $request->image->store('files','public'),
-
-                
-                
-    //         ]);
-        
-            
-    //         return redirect()->to('/welcome/product')->with('message', 'Your order has already recorded');
-    // }
+   
 
     public function editCategory(Category $category)
     {
@@ -158,21 +137,35 @@ class CategoryController extends Controller
     {
 
 
-        DB::transaction(function () use ($request, $category) {
+       
+                
             if ($request->has("category")) {
                 $category->name = $request->input('category');
                 $category->save();
             }
            
-            $category->products()->delete();
-            dd($category);
+            
+          
             if ($request->has("product")) {
                 foreach ($request->input('product') as $product) {
-                    $category->products()->updateOrInsert($product);
+                    Product::updateOrInsert(
+                        ['id'=>$product],
+                        ['category_id'=>$category->id]);
                 }
+// $products= Product::whereIn('id', $request->input('product'))->get();
+// $category->products()->saveMany($products);
             }
-        });
+        
         return redirect()->route('category.indexCategory')->with('confirm', 'category has already updated');    
     }
 
+
+
+    public function deleteCategory($id)
+    {
+        $category = Category::find($id)->delete();
+        return redirect()->route('category.indexCategory')->with('confirm', 'category has deleted successfully');
+    }
+
 }
+

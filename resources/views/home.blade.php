@@ -43,7 +43,7 @@
 							<h3 class="title">best product</h3>
 							<div class="section-nav">
 								<ul class="section-tab-nav tab-nav">
-                  <li class="active dd"  style="float: left;" value="5"><a data-toggle="tab" href="#tab2">All</a></li>
+                  <li class="active dd"  style="float: left;" value=" "><a data-toggle="tab" href="#tab2">All</a></li>
                   @foreach($categories   as $category)
 									<li class="dd" style="float: left;" value="{{$category->id}}"><a data-toggle="tab" href="#tab2">{{$category->name}}</a></li>
 									
@@ -70,7 +70,10 @@
                    <div class="col-md-3">
                    <div class="product">
                      <div class="product-img">
+                     
                        <img src="./img/product06.png" alt="">
+                      
+                       {{-- {{url('storage/'.$top->image)}} --}}
                        <div class="product-label">
                          @if ($top->off_percent() == 0)
 
@@ -99,8 +102,8 @@
                        </div>
                        <div class="product-btns">
                          <button class="add-to-wishlist"><i class="fa fa-heart seller" id="e{{$top->id}}" style="font-size:15px;color:{{$top->checkHeart()}};"></i><span class="tooltipp" id="d{{$top->id}}">{{$top->checkWordHeart()}}</span></button>
-                         <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                         <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                         {{-- <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button> --}}
+                         <button class="quick-view"><a href="/products/{{$top->id}}"><i class="fa fa-eye"></i><span class="tooltipp">view product</span></a></button>
                        </div>
                      </div>
                      <div class="add-to-cart">
@@ -194,8 +197,8 @@
 												</div>
 												<div class="product-btns">
 													<button class="add-to-wishlist"><i class="fa fa-heart seller" id="a{{$arr->id}}" style="font-size:15px;color:{{$arr->checkHeart()}};"></i><span class="tooltipp" id="c{{$arr->id}}">{{$arr->checkWordHeart()}}</span></button>
-													<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+													{{-- <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button> --}}
+													<button class="quick-view"><a href="/products/{{$arr->id}}"><i class="fa fa-eye"></i><span class="tooltipp">view product</span></a></button>
 												</div>
 											</div>
 											<div class="add-to-cart">
@@ -337,18 +340,21 @@ function attach(data){
             d1.innerHTML = " ";
           console.log(data);
 
-            data.forEach(element => {
-                 let existInCart= checkInCart(element.id)
-                 let offerPrice = checkOffer(element.id)
-                 let percentPrice = per_offers(element.id)
-                 let checkHearts = check_Hearts(element.id)
-                 let checkTexthearts = text_Hearts(element.id)
-                 let custom= customize_price(element.price,percentPrice,offerPrice);
-                 let rate=rates(element.average);
+          for (const [key, value] of Object.entries(data)) {
+                 console.log(value.id);
+                 let existInCart= checkInCart(value.id)
+                 let offerPrice = checkOffer(value.id)
+                 let percentPrice = per_offers(value.id)
+                 let checkHearts = check_Hearts(value.id)
+                 let checkTexthearts = text_Hearts(value.id)
+                 let custom= customize_price(value.price,percentPrice,offerPrice);
+                 let rate=rates(value.average);
+               //  {{url('storage/'.$top->image)}} 
                 d1.insertAdjacentHTML('beforeend', `<div class="col-md-3">
                    <div class="product">
                      <div class="product-img">
                        <img src="./img/product06.png" alt="">
+                       
                        <div class="product-label" id="product-label">
                          
                         ${percentPrice}
@@ -356,7 +362,7 @@ function attach(data){
                      </div>
                      <div class="product-body">
                        
-                       <h3 class="product-name"><a href="#">${element.name}</a></h3>
+                       <h3 class="product-name"><a href="#">${value.name}</a></h3>
                      
                        ${custom}
                       
@@ -364,18 +370,17 @@ function attach(data){
                         ${rate}
                        </div>
                        <div class="product-btns">
-                         <button class="add-to-wishlist"><i class="fa fa-heart seller" id="e${element.id}" style="font-size:15px;color:${checkHearts};"></i><span class="tooltipp" id="d${element.id}">${checkTexthearts}</span></button>
-                         <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                         <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                         <button class="add-to-wishlist"><i class="fa fa-heart seller" id="e${value.id}" style="font-size:15px;color:${checkHearts};"></i><span class="tooltipp" id="d${value.id}">${checkTexthearts}</span></button>
+                         <button class="quick-view"><a href="/products/${value.id}"><i class="fa fa-eye"></i><span class="tooltipp">view product</span></a></button>
                        </div>
                      </div>
                      <div class="add-to-cart">
-                       <button class="add-to-cart-btn" ><i class="fa fa-shopping-cart"></i> <div class="mydiv" id="${element.id}">${existInCart}</div></button>
+                       <button class="add-to-cart-btn" ><i class="fa fa-shopping-cart"></i> <div class="mydiv" id="${value.id}">${existInCart}</div></button>
                      </div>
                    </div>
                    </div>`)
 
-            });
+            };
 
 //      function attachCart(data);
 
@@ -393,7 +398,7 @@ function attach(data){
                          d1.insertAdjacentHTML('beforeend', `
 											<div class="product-widget">
 												<div class="product-img">
-													<img src="./img/product01.png" alt="">
+													<img src="{{url('./img/product01.png')}}" alt="">
 												</div>
 												<div class="product-body">
 													<h3 class="product-name"><a href="#">${value.name}</a></h3>
@@ -421,31 +426,36 @@ function attach(data){
       $(document).on("click",".seller",function() {
 
        var seller =$(this).attr("id");
-       var subSeller = seller.substring(1);
-       console.log(subSeller);
+       
+       console.log(seller);
 
        $.ajax({
-        url:"/fetch/seller/"+subSeller,
+        url:"/fetch/seller/",
         method:'GET',
         dataType: 'json',
+        data:{'seller':seller},
         success:function(data){
 
-          console.log(data);
-          var char ="a";
-          var charTop ="e";
-          var charText = "c";
-          var charTextTop = "d";
-          var identity = char.concat(data.id);
-          var identityTop = charTop.concat(data.id);
-          var textIdentity = charText.concat(data.id);
-          var textIdentityTop = charTextTop.concat(data.id);
-          var pro = document.getElementById(identity).style.color = data.color; 
-          var proTop = document.getElementById(identityTop).style.color = data.color; 
-          var text = document.getElementById(textIdentity);
+          console.log(data.id[0]);
+
+          if (data.id[0]== "a") {
+            
+            
+            console.log("hima");
+            
+            var textIdentity = data.id.replace("a", "c");
+            var pro = document.getElementById(data.id).style.color = data.color;
+            var text = document.getElementById(textIdentity);
+            text.innerHTML=data.text; 
+          }else{
+          var textIdentityTop = data.id.replace("e", "d");
+          var proTop = document.getElementById(data.id).style.color = data.color; 
           var textTop = document.getElementById(textIdentityTop);
-          text.innerHTML=data.text;
           textTop.innerHTML=data.text;
-           console.log(pro);
+          }
+          
+         
+          // console.log(pro);
           
           
            
@@ -462,20 +472,22 @@ function attach(data){
     
 
      $('.dd').click(function(){
-      if($(this).val() != '')
-      {
+      
     //    var select = $(this).attr("id");
     //    console.log(select);
+
+       
 
        var best = $(this).val();
        console.log(best);
 
 
        $.ajax({
-        url:"/fetch/best/"+best,
+        url:"/fetch/best",
         
         method:'GET',
         dataType: 'json',
+        data:{'best':best},
         success:function(data)
         {
 
@@ -490,7 +502,7 @@ function attach(data){
         }
 
        })
-      }
+      
      });
       
      $(document).on("click",".mydiv",function() {
@@ -530,14 +542,17 @@ function attach(data){
           var concats = charB.concat(prodID);
           var x = document.getElementById(prodID);
           var y = document.getElementById(concats);
-          x.innerHTML = data.status;
-          y.innerHTML = data.status;
+          if (x != null) {
+            x.innerHTML = data.status;
+          }
+          if (y != null) {
+            y.innerHTML = data.status;
+          }
+          
           
           let d1 = document.getElementById("cart-dropdown")
                         d1.innerHTML = " ";
-                           //console.log(data.lists);
-                        //    console.log(value.name);
-                        //  console.log(value.price);
+                  
                          
                           attachCart(data);
 

@@ -13,15 +13,16 @@ class CreateNewTagTable extends Migration
      */
     public function up()
     {
-        Schema::create('news_tag', function (Blueprint $table) {
+        Schema::create('new_tag', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('new_id')->unsigned();
-            $table->integer('tag_id')->unsigned();
+            $table->integer('new_id')->unsigned()->nullable();;
+            $table->integer('tag_id')->unsigned()->nullable();;
             $table->timestamps();
 
-            $table->foreign('new_id')->references('id')->on('news');
-            $table->foreign('tag_id')->references('id')->on('tags');
-
+            $table->foreign('new_id')->references('id')->on('news')->onDelete('set null')
+            ->onUpdate('cascade');;
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('set null')
+            ->onUpdate('cascade');;
         });
     }
 

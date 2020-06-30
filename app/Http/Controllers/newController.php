@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\News;
 use App\Tag;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class newController extends Controller
@@ -76,70 +77,96 @@ class newController extends Controller
             return $output;
         }
     }
+// for admins
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    public function indexnew()
     {
-        //
+        $news = News::with('tags')->paginate(2);
+        // dd($news);
+        return view('layouts.AdminPanel.news.index', [
+            'news' => $news
+        ]);
+    }
+    
+    public function createNew()
+    {
+        $tags = Tag::all();
+        
+        return view('layouts.AdminPanel.news.createnew',[
+            'tags' => $tags,
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function addnewAdmin(Request $request)
     {
-        //
+       // dd($request);
+        
+            $new = News::create([
+                'name' => $request->new,
+                'body' => $request->body,
+                'image' => $request->image->store('files','public'),
+                'created_at'=> Carbon::now(),
+            ]);
+
+            if ($request->has("tag")) {
+                
+                
+             $new->tags()->attach($request->tag);
+                
+            }
+            
+            
+            
+            return redirect()->to('/admin/news')->with('message', 'Your new has already created');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function shownew($new)
     {
-        //
+        $new = News::find($new);
+        return view('layouts.AdminPanel.news.show', ['new' => $new]);
+    }
+    
+    public function editNew($id)
+    {
+        $new = News::find($id);
+        $tagsofnew = $new->tags;
+        $tags = Tag::with('news')->get();
+        return view('layouts.AdminPanel.news.edit', ['new' => $new,'tagsofnew' => $tagsofnew , 'tags'=>$tags]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    public function updateNew(Request $request, News $new)
+    { 
+            // dd($new->tags);    
+            if ($request->has("name")) {
+                $new->name = $request->input('name');
+                
+            }
+            if ($request->has("body")) {
+                $new->body = $request->input('body');
+                
+            }
+
+            if ($request->has("image")) {
+                $new->image = $request->image->store('files','public');
+                
+            }
+           
+            if ($request->has("tag")) {
+                $new->tags()->detach();
+                foreach ($request->input('tag') as $tag) {
+                    $new->tags()->attach($request->tag);
+                }
+            }
+            $new->updated_at = Carbon::now();
+            $new->save();
+        
+        return redirect()->route('news.indexNew')->with('message', 'new has already updated');    
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function deleteNew($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $product = News::find($id)->delete();
+        return redirect()->route('news.indexNew')->with('message', 'new has deleted successfully');
     }
 }

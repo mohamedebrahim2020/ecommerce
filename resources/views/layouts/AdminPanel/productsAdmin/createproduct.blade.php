@@ -11,12 +11,7 @@
                             @csrf
                             <div class="row">
                                 <div class="col-md-12 text-center">
-                                    <div class="form-group">
-                                        {{-- <label for="category">product name:</label> --}}
-                                       <center> <input hidden type="text" class="form-control w-50" id="product"
-                                               placeholder="enter product"
-                                               name="catgory_id" value="{{$category}}"></center>
-                                    </div>
+                                
                                     <div class="form-group">
                                         <label for="category">product name:</label>
                                        <center> <input type="text" class="form-control w-50" id="product"
@@ -47,23 +42,32 @@
                                                placeholder="enter product"
                                                name="image" value=""></center>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="category">offer </label>
+                                        <div class="row">
+                                        @foreach($offers as $offer)
+                                        <div class="col-md-3">
+                                    <center> <input type="radio" class="form-control w-50" id="{{$offer->id}}"
+                                               placeholder="enter product"
+                                    name="offer_id" value="{{$offer->id}}">{{$offer->offer_percentage}}</center>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="category">category id</label>
+                                        <div class="row">
+                                        @foreach($categories as $category)
+                                        <div class="col-md-3">
+                                       <center> <input type="radio" class="form-control w-50" id="{{$category->id}}"
+                                               placeholder="enter product"
+                                               name="category_id" value="{{$category->id}}">{{$category->name}}</center>
+                                        </div>       
+                                   @endforeach
+                                        </div>
+                                            </div>
                                     
                                  
-                                    {{-- <div class="ml-4 mt-4">
-                                        <div class="ml-4 my-3">
-                                            @foreach ($attributes as $attribute)
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="attribute[]"
-                                                           id="{{$attribute->id}}" value="{{$attribute->id}}"
-                                                        {{($attributeOfCategory)->contains($attribute) ? 'checked' : ' '}}>
-                                                    <label class="form-check-label" for="{{$attribute->id}}">
-                                                        {{$attribute->attribute_name}}
-                                                    </label>
-                                                </div>
-
-                                            @endforeach
-                                        </div>
-                                    </div> --}}
                                 </div>
                             </div>
 

@@ -7,11 +7,13 @@ use Cog\Contracts\Ban\Bannable as BannableContract;
 use Cog\Laravel\Ban\Traits\Bannable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable // implements BannableContract
+class User extends Authenticatable  implements BannableContract
 {
-    //use Bannable;
+    use Bannable;
     use Notifiable;
+    use HasRoles;
     
 
     /**
@@ -43,7 +45,7 @@ class User extends Authenticatable // implements BannableContract
 
     public function products(){
 
-        return  $this->belongsToMany('App\Product', 'rates', '', 'product_id');
+        return  $this->belongsToMany('App\Product', 'rates', 'user_id', 'product_id');
 
     }
      
@@ -55,7 +57,9 @@ class User extends Authenticatable // implements BannableContract
         return $this->belongsToMany('App\Product', 'favourites', 'user_id', 'product_id');
     }
 
-
+    public function reviews(){
+        return $this->belongsToMany('App\Product', 'reviews', 'user_id', 'product_id');
+    }
 
     // for admins
 

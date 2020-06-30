@@ -17,7 +17,7 @@
                                 <label for="{{$category->id}}">category name:</label>
                                 <input type="text" class="form-control w-25" id="{{$category->id}}"
                                        placeholder="enter category" name="category"
-                                       value="{{$category->category_name}}">
+                                       value="{{$category->name}}">
                                
                             </div>
                             <div class="ml-4 mt-4">
@@ -25,7 +25,7 @@
                                     @foreach ($products as $product)
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox"
-                                                   name="attribute[]" id="{{$product->id}}" value="{{$product->id}}"
+                                                   name="product[]" id="{{$product->id}}" value="{{$product->id}}"
                                                 {{($productsOfCategory)->contains($product) ? 'checked' : ' '}}>
                                             <label class="form-check-label" for="{{$product->id}}">
                                                 {{$product->name}}

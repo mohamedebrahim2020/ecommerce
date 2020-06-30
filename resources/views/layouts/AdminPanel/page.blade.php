@@ -62,10 +62,10 @@
                             Category Management</a>
                     </li>
                     <li>
-                        <a href="/items/index"> <i class="fas fa-table"></i>Items Management</a>
+                        <a href="/admin/product"> <i class="fas fa-table"></i>Products Management</a>
                     </li>
                     <li>
-                        <a href="/admin/panel/report"> <i class="fas fa-table"></i>Reports Management</a>
+                        <a href="/admin/news"> <i class="fas fa-table"></i>News Management</a>
                     </li>
                    
 
@@ -90,21 +90,21 @@
                             <div class="noti-wrap ">
                                 <div class="noti__item js-item-menu">
                                     <i class="zmdi zmdi-comment-more"></i>
-                                    {{-- @if(count($lastMessages)!=0)
+                                    @if(count($lastMessages)!=0)
                                         <span class="quantity">{{count($lastMessages)}}</span>
-                                    @endif --}}
+                                    @endif
                                     <div class="mess-dropdown js-dropdown">
                                         <div class="mess__title">
-                                            {{-- <p>You have {{count($lastMessages)}} news message</p> --}}
+                                            <p>You have {{count($lastMessages)}} news message</p>
                                         </div>
                                         <div class="mess__item">
                                             <div class="content">
 
-                                                {{-- @foreach($lastMessages as $lastmessage)
+                                                @foreach($lastMessages as $lastmessage)
                                                     <h6>{{$lastmessage->name}}</h6>
-                                                    <P>{{$lastmessage->subject}}}</P>
+                                                    {{-- <P>{{$lastmessage->subject}}}</P> --}}
                                                     <hr>
-                                                @endforeach --}}
+                                                @endforeach
                                             </div>
                                         </div>
 

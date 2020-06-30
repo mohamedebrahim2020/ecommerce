@@ -29,7 +29,11 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
     
     <!-- Styles -->
-    <link href="{{ asset('css/temp.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/temp.css') }}" rel="stylesheet">
+	{{-- <link rel="stylesheet" href="{{asset('css/reg_style.css')}}"> --}}
+	<link rel="stylesheet" href="{{asset('fonts/material-icon/css/material-design-iconic-font.min.css')}}">
+    	<link rel="stylesheet" href="{{asset('fonts/material-icon/css/material-design-iconic-font.min.css')}}">
+
     {{-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -39,7 +43,7 @@
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
-    
+		@yield('styles')
 </head>
 
 
@@ -66,7 +70,7 @@
                     </li>
                 @endif
             @else
-                <li class="nav-item dropdown">
+                {{-- <li class="nav-item dropdown" id="customstyle" >
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre><i class="fa fa-user-o"></i>
                         {{ Auth::user()->name }} <span class="caret"></span>
                     </a>
@@ -86,7 +90,32 @@
                             @csrf
                         </form>
                     </div>
-                </li>
+				</li> --}}
+				<li class="buy-tickets dropdown pl-xl-5" style="float: right;">
+					<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+						{{ Auth::user()->name }} <span class="caret"></span>
+					</a>
+
+
+					<div class="dropdown-menu dropdown-menu-right mt-2" style="border: 0px;background:grey;">
+						<a class="dropdown-item d-block" href="/profile">
+							{{ __('MyProfile') }}
+						</a><br>
+					   @role('Admin') <a class="dropdown-item d-block" href="/admin">
+							{{ __('Dashboard') }}
+						</a><br>
+						@endrole
+						<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+												 document.getElementById('logout-form').submit();">
+							{{ __('Logout') }}
+						</a>
+
+						<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+							@csrf
+						</form>
+					</div>
+
+				</li>
             @endguest
         </ul>
         
@@ -204,27 +233,29 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-					<li class="nav-item dropdown">
+						<li class="nav-item {{ request()->routeIs('home') ? 'active' : '' }}"><a href="/home">Home</a></li>
+					<li id="drop" class="nav-item dropdown">
                           <div style="width:135px;">
-                          <select name="category" id="category" class="form-control input-lg dynamic" style="border-style: none;" data-dependent="state">
-                            <option value="" style="border-style: none;">category</option>
+                          <select name="products" id="category" class="form-control input-lg dynamic" style="border-style: none;min-width: 90px;z-index: 1; " data-dependent="state"  onchange="location = this.value;">
+                            <option value="" style="border-style: none;" >Products</option>
                             @foreach($categories   as $category)
-                            <option value="{{ $category->id}}">{{ $category->name }}</option>
+						  <option id="cat{{$category->id}}" value="/show/products/{{ $category->id}}">{{ $category->name }}</option>
                             @endforeach
                            </select>
                            <div>
-                          </li>
-                          <li class="nav-item" >
+						  </li>
+						  {{-- (request()->is('admin/cities*')) --}}
+						  {{-- @if(Request::is('about')) active @endif --}}
+                          <li class="nav-item {{ request()->routeIs('user.offers') ? 'active' : '' }}" >
                             <a class="nav-link" href="/offer">offers </a>
                           </li>
-                          <li class="nav-item" >
+                          <li class="nav-item {{ request()->routeIs('') ? '' : '' }}" >
                             <a class="nav-link" href="#">about us </a>
                           </li>
-                          <li class="nav-item" >
+                          <li class="nav-item {{ request()->routeIs('news') ? 'active' : '' }}" >
                             <a class="nav-link" href="/newtag">news </a>
                           </li>
-                          <li class="nav-item" >
+                          <li class="nav-item {{ request()->routeIs('contact') ? 'active' : '' }}" >
                             <a class="nav-link" href="/contact">contact us  </a>
                           </li>
 					</ul>
@@ -235,7 +266,7 @@
 			<!-- /container -->
 		</nav>
 		<!-- /NAVIGATION -->
-        <main class="py-4">
+        <main class="py-5">
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
         
@@ -408,46 +439,10 @@
       }
 
 
-     $(document).ready(function(){
-     $('.dynamic').change(function(){
-      if($(this).val() != '')
-      {
-       var select = $(this).attr("id");
-       console.log(select);
-
-       var value = $(this).val();
-       console.log(value);
-
-
-       $.ajax({
-        url:"/fetch/products/"+value,
-        method:'GET',
-        dataType: 'json',
-        success:function(data)
-        {
-
-
-            let d1 = document.getElementById("prods")
-                        let SPAN = document.getElementById("numbs")
-                        d1.innerHTML = " ";
-                        SPAN.innerHTML = " ";
-
-
-                        // if (data.data.length != 0) {
-                        //     if(data.last_page>1){
-                        //         //  paginate(data)
-                        //     }
-                          add(data);
-                        // } else {
-                        //     d1.innerHTML = "No Results Found";
-                        //     d1.className = "row font-weight-bold text-danger";
-                        // }
-        }
-
-       })
-      }
-     });
-
+    $(document).ready(function(){
+		var custom = document.getElementById('customstyle');
+		console.log(custom);
+		
      });
     </script>
 </body>

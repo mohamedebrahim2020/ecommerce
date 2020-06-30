@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
-    protected $fillable = ['name','description','quantity','price','image'];
+    protected $fillable = ['name','description','quantity','price','image','category_id','offer_id'];
 //when we use create[] or object we must fill all fillable values
     public function category(){
 
@@ -23,15 +23,11 @@ class Product extends Model
 
     }
 
-    public function properties(){
-
-        return  $this->hasMany(Property::class);
-
-    }
-
     public function reviews(){
-        return $this->hasMany(Review::class);
+        return $this->belongsToMany('App\User', 'reviews', 'product_id', 'user_id')->withPivot('body','rank', 'created_at');;
     }
+
+   
 
     public function users(){
         return $this->belongsToMany('App\User', 'rates', 'product_id', 'user_id');
@@ -97,7 +93,12 @@ class Product extends Model
            return  $y;
        }
 
+    // public function getRank(){
+    //   $user_id = $this->users->user_id;
+    //   $rank= DB::table('rates')->where([['product_id', '=', $this->id],['user_id','=',$user_id]])->get('rank');
 
+    //    return $rank;
+    // }
 
 
 }

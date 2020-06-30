@@ -99,7 +99,39 @@
 
 <script type="text/javascript">
 
-    
+function attachCart(data){
+        let d1 = document.getElementById('cart-dropdown');
+            d1.innerHTML = " ";
+            d2 =  document.getElementById('cart-summary');
+            d2.innerHTML = " ";
+          
+
+            for (const [key, value] of Object.entries(data.lists)) {
+                            console.log(value.name);
+                         console.log(value.price);
+                         d1.insertAdjacentHTML('beforeend', `
+											<div class="product-widget">
+												<div class="product-img">
+													<img src="./img/product01.png" alt="">
+												</div>
+												<div class="product-body">
+													<h3 class="product-name"><a href="#">${value.name}</a></h3>
+													<h4 class="product-price"><span class="qty">1x</span>${value.price}</h4>
+												</div>
+												<button class="delete"><i class="fa fa-close"></i></button>
+                      </div>
+                      `)
+                                        }
+
+            d2.insertAdjacentHTML('beforeend', `
+            <small>${data.count} Item(s) selected</small>
+											<h5>SUBTOTAL: $${data.prices}</h5>
+                      `)
+
+
+
+
+      }    
 function text_Hearts(product_id) {
     let text_heart='';
     $.ajax({
@@ -181,9 +213,13 @@ $.ajax({
    var charB ="b";
    var concats = charB.concat(prodID);
    var x = document.getElementById(prodID);
-   var y = document.getElementById(concats);
    x.innerHTML = data.status;
-   y.innerHTML = data.status;
+   counts.innerHTML= data.count;
+   let d1 = document.getElementById("cart-dropdown")
+                        d1.innerHTML = " ";
+                      
+                         
+                          attachCart(data);
    
    
 

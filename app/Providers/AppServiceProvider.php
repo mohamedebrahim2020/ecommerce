@@ -32,6 +32,10 @@ class AppServiceProvider extends ServiceProvider
             $categories = DB::table('categories')->get();
             View::share('categories', $categories);
         }
+        if (Schema::hasTable('contacts')) {
+            $lastMessages = DB::table("contacts")->latest("created_at")->take(3)->get();
+            View::share('lastMessages', $lastMessages);
+        }
        
         view()->composer('*', function ($view) 
     {   

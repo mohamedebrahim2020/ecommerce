@@ -24,4 +24,16 @@ class ContactController extends Controller
         ]);
         return redirect()->to('/contact')->with('message', 'Your message has been sent. Thank you!');
     }
+
+   //for admins
+
+    public function indexTable()
+    {
+        return view('layouts.AdminPanel.messages', ['contacts' => DB::table("contacts")->latest("created_at")->paginate(5)]);
+    }
+    public function destroy($id)
+    {
+        DB::table("contacts")->delete($id);
+        return redirect()->to('/allmessages');
+    }
 }

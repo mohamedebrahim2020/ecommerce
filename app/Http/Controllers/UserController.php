@@ -98,21 +98,32 @@ class UserController extends Controller
     // for admin
 
     public function adminUsers()
-    {
+    {   
         $users = User::paginate(3);
+        
         return view('layouts.AdminPanel.user.userstable', ['users' => $users]);
     }
-    // public function ban(Request $request, $id)
-    // {
-    //     $user = User::find($id);
-    //     if (!empty($user)) {
+    public function ban(Request $request, $id)
+    {
+        $user = User::find($id);
+        if (!empty($user)) {
 
-    //         $user->bans()->create([
-    //             'expired_at' => '+1 month'
-    //         ]);
-    //     }
-    //     return redirect('/admin/panel/userstable')->with('success', 'Ban Successfully..');
-    // }
+            $user->bans()->create([
+                'expired_at' => '+1 month'
+            ]);
+        }
+        return redirect('/admin/panel/userstable')->with('success', 'Ban Successfully..');
+    }
+
+    public function revoke($id)
+    {
+        $user = User::find($id);
+        if (!empty($user)) {
+            $user->unban();
+        }
+        return redirect('/admin/panel/userstable')
+            ->with('success', 'User Revoke Successfully.');
+    }
      
 
     public function showuser($id)
