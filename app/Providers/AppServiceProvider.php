@@ -45,9 +45,6 @@ class AppServiceProvider extends ServiceProvider
         $view->with('lists', $lists );    
         });
 
-        if($this->app->environment() == 'production') {
-        URL::forceScheme('https');
-            URL::forceRootUrl(Config::get('app.url'));
-        } 
+        
     }
 }
