@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/*"
+  to = "https://himaaaz.netlify.app"
+  status = 200
