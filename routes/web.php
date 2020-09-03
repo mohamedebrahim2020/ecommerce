@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\ProductController;
-use Illuminate\Support\Facades\Route;
+// use App\Http\Controllers\ProductController;
+// use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +36,7 @@ Route::get('/newtag', function () {
 // Route::get('/dd/{category}','ProductController@towards');
 // Route::get('/c', function () {return view('carts.checkout');});
 Route::get('/test','CartController@test');
+Route::get('/testpayment','payOrderController@store');
 //products
 Route::get('/exist/{product}','ProductController@checkCard');
 Route::get('/offer/{product}','ProductController@price_offer');

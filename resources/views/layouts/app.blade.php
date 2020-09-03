@@ -43,6 +43,31 @@
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
+
+		<style>
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+		</style>
 		@yield('styles')
 </head>
 
@@ -235,14 +260,24 @@
 					<ul class="main-nav nav navbar-nav">
 						<li class="nav-item {{ request()->routeIs('home') ? 'active' : '' }}"><a href="/home">Home</a></li>
 					<li id="drop" class="nav-item dropdown">
-                          <div style="width:135px;">
+                          {{-- <div style="width:135px;">
                           <select name="products" id="category" class="form-control input-lg dynamic" style="border-style: none;min-width: 90px;z-index: 1; " data-dependent="state"  onchange="location = this.value;">
                             <option value="" style="border-style: none;" >Products</option>
                             @foreach($categories   as $category)
 						  <option id="cat{{$category->id}}" value="/show/products/{{ $category->id}}">{{ $category->name }}</option>
                             @endforeach
                            </select>
-                           <div>
+                           <div> --}}
+							<a href="javascript:void(0)" class="dropbtn" style="display: inline-block;">Products</a>
+							<div class="dropdown-content" >
+								@foreach($categories   as $category)
+								{{-- <option id="cat{{$category->id}}" value="/show/products/{{ $category->id}}">{{ $category->name }}</option> --}}
+								<a id="cat{{$category->id}}" style="display:block;" href="/show/products/{{ $category->id}}">{{ $category->name }}</a>
+								@endforeach
+							  
+							  {{-- <a href="#">Link 2</a>
+							  <a href="#">Link 3</a> --}}
+							</div>
 						  </li>
 						  {{-- (request()->is('admin/cities*')) --}}
 						  {{-- @if(Request::is('about')) active @endif --}}

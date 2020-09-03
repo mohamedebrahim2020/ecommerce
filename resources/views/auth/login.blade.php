@@ -2,11 +2,11 @@
 
 @section('content')
 <div class="container">
-    @if(session('message'))
-    <div class="alert alert-success">
-        {{ session('message') }}
-    </div>
-@endif
+    @if (session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -17,29 +17,34 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="email"
+                                class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                    name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password"
+                                class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="password" type="password"
+                                    class="form-control @error('password') is-invalid @enderror" name="password"
+                                    required autocomplete="current-password">
 
                                 @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -47,7 +52,8 @@
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember"
+                                        {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
                                         {{ __('Remember Me') }}
@@ -80,18 +86,18 @@
 
 @section('content')
 @section('styles')
-<link rel="stylesheet" href="{{asset('css/reg_style.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/reg_style.css') }}">
 
 @stop
 <div class="main">
-    
+
     <section class="sign-in">
         <div class="container">
             <div class="signin-content">
 
 
                 <div class="signin-form">
-                    @if(session('message'))
+                    @if (session('message'))
                         <div class="alert alert-success">
                             {{ session('message') }}
                         </div>
@@ -102,30 +108,29 @@
                         <div class="form-group">
                             <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                   name="email" value="{{ old('email') }}" required autocomplete="email" autofocus
-                                   placeholder="{{ __('Your Email') }}">
+                                name="email" value="{{ old('email') }}" required autocomplete="email" autofocus
+                                placeholder="{{ __('Your Email') }}">
 
                             @error('email')
                             <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror</div>
                         <div class="form-group">
                             <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
                             <input id="password" type="password"
-                                   class="form-control @error('password') is-invalid @enderror" name="password"
-                                   required autocomplete="current-password"
-                                   placeholder="{{ __('Password') }}">
+                                class="form-control @error('password') is-invalid @enderror" name="password" required
+                                autocomplete="current-password" placeholder="{{ __('Password') }}">
 
                             @error('password')
                             <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror</div>
                         <div class="form-group">
-                            <input type="checkbox" name="remember-me" id="remember-me" class="agree-term"/>
+                            <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
                             <label for="remember-me"
-                                   class="label-agree-term"><span><span></span></span>{{ __('Remember me') }}
+                                class="label-agree-term"><span><span></span></span>{{ __('Remember me') }}
                             </label>
                         </div>
                         <div class="form-group form-button">
@@ -144,7 +149,8 @@
                         <span class="social-label">{{ __('Or login with') }}</span>
                         <ul class="socials">
                             {{-- <li><a href="{{ url('auth/redirect/facebook') }}"><i
-                                        class="display-flex-center zmdi zmdi-facebook"></i></a></li> --}}
+                                        class="display-flex-center zmdi zmdi-facebook"></i></a></li>
+                            --}}
                             <li><a href="{{ url('auth/redirect/google') }}"><i
                                         class="display-flex-center zmdi zmdi-google"></i></a></li>
                         </ul>
@@ -156,9 +162,9 @@
 
 </div>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $(".alert").slideDown(300).delay(3000).slideUp(300);
     });
+
 </script>
 @endsection
-

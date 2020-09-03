@@ -16,15 +16,15 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function home(Category $category){
-        
-       $cat= $category->products;
-    
-     return response()->json($cat);
+    public function home(Category $category)
+    {
 
-     }
+        $cat = $category->products;
 
-    
+        return response()->json($cat);
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -108,15 +108,15 @@ class CategoryController extends Controller
 
     public function addCategoryAdmin(Request $request)
     {
-        
-            $category = Category::create([
-                'name' => $request->category,
-                
-            ]);
-        $category=$category->id;
-        return redirect()->route('category.indexCategory')->with('confirm', 'category has already added');    
+
+        $category = Category::create([
+            'name' => $request->category,
+
+        ]);
+        $category = $category->id;
+        return redirect()->route('category.indexCategory')->with('confirm', 'category has already added');
     }
-   
+
 
     public function editCategory(Category $category)
     {
@@ -128,7 +128,7 @@ class CategoryController extends Controller
             'products' => $products
         ]);
     }
-    
+
     public function productindex()
     {
         return view('layouts.AdminPanel.categoryAdmin.productIndex');
@@ -137,26 +137,27 @@ class CategoryController extends Controller
     {
 
 
-       
-                
-            if ($request->has("category")) {
-                $category->name = $request->input('category');
-                $category->save();
+
+
+        if ($request->has("category")) {
+            $category->name = $request->input('category');
+            $category->save();
+        }
+
+
+
+        if ($request->has("product")) {
+            foreach ($request->input('product') as $product) {
+                Product::updateOrInsert(
+                    ['id' => $product],
+                    ['category_id' => $category->id]
+                );
             }
-           
-            
-          
-            if ($request->has("product")) {
-                foreach ($request->input('product') as $product) {
-                    Product::updateOrInsert(
-                        ['id'=>$product],
-                        ['category_id'=>$category->id]);
-                }
-// $products= Product::whereIn('id', $request->input('product'))->get();
-// $category->products()->saveMany($products);
-            }
-        
-        return redirect()->route('category.indexCategory')->with('confirm', 'category has already updated');    
+            // $products= Product::whereIn('id', $request->input('product'))->get();
+            // $category->products()->saveMany($products);
+        }
+
+        return redirect()->route('category.indexCategory')->with('confirm', 'category has already updated');
     }
 
 
@@ -166,6 +167,4 @@ class CategoryController extends Controller
         $category = Category::find($id)->delete();
         return redirect()->route('category.indexCategory')->with('confirm', 'category has deleted successfully');
     }
-
 }
-

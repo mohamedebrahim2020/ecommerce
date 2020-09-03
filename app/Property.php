@@ -8,14 +8,14 @@ class Property extends Model
 {
     protected $fillable = ['property'];
 
-    public function products(){
+    public function products()
+    {
 
         return  $this->belongsTo(Product::class);
-
     }
 
-    public function values(){
+    public function values()
+    {
         return $this->hasMany(Values::class);
     }
-
 }

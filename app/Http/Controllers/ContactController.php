@@ -9,12 +9,12 @@ class ContactController extends Controller
 {
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email:rfc,dns',
-            'subject' => 'required|min:8',
-            'message' => 'required',
-        ]);
+        // $request->validate([
+        //      'name' => 'required',
+        //      'email' => 'required|email:rfc,dns',
+        //      'subject' => 'required|min:8',
+        //      'message' => 'required',
+        // ]);
         
         DB::table('contacts')->insert([
             'name' => $request->name,

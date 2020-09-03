@@ -13,25 +13,24 @@
                                     <i class="zmdi zmdi-account-o"></i>
                                 </div>
                                 <div class="text">
-                                    <h2>{{$members}}</h2>
+                                    <h2>{{ $members }}</h2>
                                     <span>members</span>
                                 </div>
                             </div>
                             <div class="overview-chart">
                                 <div class="chartjs-size-monitor"
-                                     style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                    style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
                                     <div class="chartjs-size-monitor-expand"
-                                         style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                        <div
-                                            style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                                        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
                                     </div>
                                     <div class="chartjs-size-monitor-shrink"
-                                         style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
                                         <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
                                     </div>
                                 </div>
                                 <canvas id="widgetChart1" height="54" width="114" class="chartjs-render-monitor"
-                                        style="display: block; height: 73px; width: 152px;"></canvas>
+                                    style="display: block; height: 73px; width: 152px;"></canvas>
                             </div>
                         </div>
                     </div>
@@ -44,25 +43,24 @@
                                     <i class="far fa-file"></i>
                                 </div>
                                 <div class="text">
-                                    <h2>{{$reports}}</h2>
+                                    <h2>{{ $reports }}</h2>
                                     <span>products</span>
                                 </div>
                             </div>
                             <div class="overview-chart">
                                 <div class="chartjs-size-monitor"
-                                     style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                    style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
                                     <div class="chartjs-size-monitor-expand"
-                                         style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                        <div
-                                            style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                                        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
                                     </div>
                                     <div class="chartjs-size-monitor-shrink"
-                                         style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
                                         <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
                                     </div>
                                 </div>
                                 <canvas id="widgetChart2" height="86" width="114" class="chartjs-render-monitor"
-                                        style="display: block; height: 115px; width: 152px;"></canvas>
+                                    style="display: block; height: 115px; width: 152px;"></canvas>
                             </div>
                         </div>
                     </div>
@@ -75,25 +73,24 @@
                                     <i class="far fa-file"></i>
                                 </div>
                                 <div class="text">
-                                    <h2>{{$items}}</h2>
+                                    <h2>{{ $items }}</h2>
                                     <span>categories</span>
                                 </div>
                             </div>
                             <div class="overview-chart">
                                 <div class="chartjs-size-monitor"
-                                     style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                    style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
                                     <div class="chartjs-size-monitor-expand"
-                                         style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                        <div
-                                            style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                                        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
                                     </div>
                                     <div class="chartjs-size-monitor-shrink"
-                                         style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
                                         <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
                                     </div>
                                 </div>
                                 <canvas id="widgetChart3" height="86" width="114" class="chartjs-render-monitor"
-                                        style="display: block; height: 115px; width: 152px;"></canvas>
+                                    style="display: block; height: 115px; width: 152px;"></canvas>
                             </div>
                         </div>
                     </div>
@@ -107,26 +104,26 @@
                                     <i class="far fa-calendar"></i>
                                 </div>
                                 <div class="text">
-                                    {{-- <h2>{{$difference}}</h2> --}}
-                                    
+                                    {{-- <h2>{{ $difference }}</h2>
+                                    --}}
+
                                     <span>launches </span>
                                 </div>
                             </div>
                             <div class="overview-chart">
                                 <div class="chartjs-size-monitor"
-                                     style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                    style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
                                     <div class="chartjs-size-monitor-expand"
-                                         style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                        <div
-                                            style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                                        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                        <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
                                     </div>
                                     <div class="chartjs-size-monitor-shrink"
-                                         style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                        style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
                                         <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
                                     </div>
                                 </div>
                                 <canvas id="widgetChart4" height="48" width="114" class="chartjs-render-monitor"
-                                        style="display: block; height: 115px; width: 152px;"></canvas>
+                                    style="display: block; height: 115px; width: 152px;"></canvas>
                             </div>
                         </div>
                     </div>
@@ -137,19 +134,19 @@
                     <div class="au-card m-b-30">
                         <div class="au-card-inner">
                             <div class="chartjs-size-monitor"
-                                 style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
                                 <div class="chartjs-size-monitor-expand"
-                                     style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                    style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
                                     <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
                                 </div>
                                 <div class="chartjs-size-monitor-shrink"
-                                     style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                    style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
                                     <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
                                 </div>
                             </div>
                             <h3 class="title-2 m-b-40">best selling</h3>
                             <canvas id="pieChart" height="422" width="634" class="chartjs-render-monitor"
-                                    style="display: block; width: 634px; height: 422px;"></canvas>
+                                style="display: block; width: 634px; height: 422px;"></canvas>
                         </div>
                     </div>
                 </div>
@@ -157,19 +154,19 @@
                     <div class="au-card m-b-30">
                         <div class="au-card-inner">
                             <div class="chartjs-size-monitor"
-                                 style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
                                 <div class="chartjs-size-monitor-expand"
-                                     style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                    style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
                                     <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
                                 </div>
                                 <div class="chartjs-size-monitor-shrink"
-                                     style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                    style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
                                     <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
                                 </div>
                             </div>
                             <h3 class="title-2 m-b-40">best rating</h3>
                             <canvas id="pieChart1" height="422" width="634" class="chartjs-render-monitor"
-                                    style="display: block; width: 634px; height: 422px;"></canvas>
+                                style="display: block; width: 634px; height: 422px;"></canvas>
                         </div>
                     </div>
                 </div>
@@ -177,19 +174,19 @@
                     <div class="au-card m-b-30">
                         <div class="au-card-inner">
                             <div class="chartjs-size-monitor"
-                                 style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
                                 <div class="chartjs-size-monitor-expand"
-                                     style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                    style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
                                     <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
                                 </div>
                                 <div class="chartjs-size-monitor-shrink"
-                                     style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                    style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
                                     <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
                                 </div>
                             </div>
                             <h3 class="title-2 m-b-40">most buyer</h3>
                             <canvas id="pieChart2" height="422" width="634" class="chartjs-render-monitor"
-                                    style="display: block; width: 634px; height: 422px;"></canvas>
+                                style="display: block; width: 634px; height: 422px;"></canvas>
                         </div>
                     </div>
                 </div>
@@ -197,19 +194,19 @@
                     <div class="au-card m-b-30">
                         <div class="au-card-inner">
                             <div class="chartjs-size-monitor"
-                                 style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
                                 <div class="chartjs-size-monitor-expand"
-                                     style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                    style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
                                     <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
                                 </div>
                                 <div class="chartjs-size-monitor-shrink"
-                                     style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                    style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
                                     <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
                                 </div>
                             </div>
                             <h3 class="title-2 m-b-40">Clicks And Views</h3>
                             <canvas id="sales-chart" height="317" width="634" class="chartjs-render-monitor"
-                                    style="display: block; width: 634px; height: 317px;"></canvas>
+                                style="display: block; width: 634px; height: 317px;"></canvas>
                         </div>
                     </div>
                 </div>
@@ -219,84 +216,84 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            var x, y ,w ,z ;
-            var a, b ,c,d;
-            var m, n , l, o;
-            $.get("/chartData", function (data) {
-               // console.log(data);
-                
+        $(document).ready(function() {
+            var x, y, w, z;
+            var a, b, c, d;
+            var m, n, l, o;
+            $.get("/chartData", function(data) {
+                // console.log(data);
+
                 var array = data.name.original;
-               // console.log(array);
-                
+                // console.log(array);
+
                 for (let i = 0; i < array.length; i++) {
                     if (i == 1) {
                         x = array[i][1];
-                        namex= array[i][0];
+                        namex = array[i][0];
                     } else if (i == 2) {
                         y = array[i][1];
-                        namey= array[i][0];
-                    }else if (i == 3) {
+                        namey = array[i][0];
+                    } else if (i == 3) {
                         w = array[i][1];
-                        namew= array[i][0];
-                    }else if (i == 4) {
+                        namew = array[i][0];
+                    } else if (i == 4) {
                         z = array[i][1];
-                        namez= array[i][0];
+                        namez = array[i][0];
                     }
                 }
-                getChart("pieChart", x, y,w,z , namex, namey,namew,namez);
+                getChart("pieChart", x, y, w, z, namex, namey, namew, namez);
             });
-            $.get("/chartData1", function (data) {
+            $.get("/chartData1", function(data) {
                 console.log(data.prod);
                 var array1 = data.prod.original;
-               console.log(array1);
-               
+                console.log(array1);
+
                 for (let i = 0; i < array1.length; i++) {
                     if (i == 1) {
                         a = array1[i][1];
-                        namea= array1[i][0];
+                        namea = array1[i][0];
                     } else if (i == 2) {
                         b = array1[i][1];
-                        nameb= array1[i][0];
-                    }else if (i == 3) {
+                        nameb = array1[i][0];
+                    } else if (i == 3) {
                         c = array1[i][1];
-                        namec= array1[i][0];
-                    }else if (i == 4) {
+                        namec = array1[i][0];
+                    } else if (i == 4) {
                         d = array1[i][1];
-                        named= array1[i][0];
+                        named = array1[i][0];
                     }
                 }
-                getChart("pieChart1", a, b,c,d ,namea, nameb,namec,named);
+                getChart("pieChart1", a, b, c, d, namea, nameb, namec, named);
             });
-            $.get("/chartData2", function (data) {
+            $.get("/chartData2", function(data) {
                 console.log(data);
                 var array2 = data.user.original;
                 // console.log((data.is_found.original)[1])
                 for (let i = 0; i < array2.length; i++) {
                     if (i == 1) {
                         m = array2[i][1];
-                        namem= array2[i][0];
+                        namem = array2[i][0];
                     } else if (i == 2) {
                         n = array2[i][1];
-                        namen= array2[i][0];
-                    }else if (i == 3) {
+                        namen = array2[i][0];
+                    } else if (i == 3) {
                         l = array2[i][1];
-                        namel= array2[i][0];
-                    }else if (i == 4) {
+                        namel = array2[i][0];
+                    } else if (i == 4) {
                         o = array2[i][1];
-                        nameo= array2[i][0];
+                        nameo = array2[i][0];
                     }
                 }
-                getChart("pieChart2", m, n,l,o,namem,namen,namel,nameo);
+                getChart("pieChart2", m, n, l, o, namem, namen, namel, nameo);
 
             });
-            $.get("/twoline", function (data) {
+            $.get("/twoline", function(data) {
                 console.log(data);
                 drawTwoLine(data)
 
             });
 
-            function getChart(id, value1, value2,value3,value4, x, y,w,z) {
+            function getChart(id, value1, value2, value3, value4, x, y, w, z) {
                 try {
                     var ctx = document.getElementById(id);
                     if (ctx) {
@@ -305,7 +302,7 @@
                             type: 'pie',
                             data: {
                                 datasets: [{
-                                    data: [value1, value2 ,value3,value4],
+                                    data: [value1, value2, value3, value4],
                                     backgroundColor: [
                                         "rgba(0, 123, 255,0.9)",
                                         "rgba(0, 123, 255,0.7)",
@@ -447,6 +444,7 @@
             }
 
         }
+
     </script>
 
 @endsection

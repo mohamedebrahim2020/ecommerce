@@ -6,14 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $fillable = ['contact_email','shipping_address','shipping_method'];
+    protected $fillable = ['contact_email', 'shipping_address', 'shipping_method'];
 
-    public function users(){
+    public function users()
+    {
 
         return  $this->belongsTo(User::class);
     }
 
-    public function products(){
+    public function products()
+    {
 
         return  $this->belongsToMany(Product::class)->withPivot('quantity', 'created_at');
     }
